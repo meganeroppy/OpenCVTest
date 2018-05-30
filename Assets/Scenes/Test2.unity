@@ -432,6 +432,35 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 219549510}
+--- !u!1 &235762504 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100096, guid: 412b92d4feeb9c548bfa98f62c4d1022, type: 2}
+  m_PrefabInternal: {fileID: 1711844952}
+--- !u!114 &235762508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 235762504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 235091795f01be64e9f0ce9959f2d908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  durationRate: 1
+  effectRate: 1
+  maxDuration: 1.2
+  minDuration: 2.4
+  restDuration: 0.2
+  SpineInhaleAngle: 2
+  SpineExhaleAngle: -2
+  ChestInhaleAngle: -3
+  ChestExhaleAngle: 3
+  NeckInhaleAngle: 0.5
+  NeckExhaleAngle: -0.5
+  HeadInhaleAngle: 0.5
+  HeadExhaleAngle: -0.5
+  InhalingMethod: 0
 --- !u!1 &347822783
 GameObject:
   m_ObjectHideFlags: 0
