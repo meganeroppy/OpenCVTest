@@ -84,6 +84,9 @@ namespace FaceTrackerExample
 		public int Height = 480;
 
 		[SerializeField]
+		Camera mainCamera;
+
+		[SerializeField]
 		Camera objectCamera;
 
 		// Use this for initialization
@@ -163,14 +166,14 @@ namespace FaceTrackerExample
 			float heightScale = (float)Screen.height / height;
 			if (widthScale < heightScale)
 			{
-				Camera.main.orthographicSize = (width * (float)Screen.height / (float)Screen.width) / 2;
+				mainCamera.orthographicSize = (width * (float)Screen.height / (float)Screen.width) / 2;
 			} 
 			else
 			{
-				Camera.main.orthographicSize = height / 2;
+				mainCamera.orthographicSize = height / 2;
 			}
 
-			if( objectCamera != null ) objectCamera.orthographicSize = Camera.main.orthographicSize;
+			if( objectCamera != null ) objectCamera.orthographicSize = mainCamera.orthographicSize;
 
 			gameObject.GetComponent<Renderer>().material.mainTexture = texture;
 
@@ -300,7 +303,7 @@ namespace FaceTrackerExample
 								{
 									var rect = rectsList[i];
 
-									Debug.Log( string.Format("Rect位置( {0}, {1})  Rectサイズ( {2}, {3})", rect.x, rect.y, rect.width, rect.height) );
+//									Debug.Log( string.Format("Rect位置( {0}, {1})  Rectサイズ( {2}, {3})", rect.x, rect.y, rect.width, rect.height) );
 									var pos = new Vector2( 
 										rect.x - ( rect.width / 2 )
 										,
@@ -455,7 +458,7 @@ namespace FaceTrackerExample
 		/// <returns></returns>
 		private Vector3 Vector2ToVector3( Vector2 vector2 )
 		{
-			if ( Camera.main == null ) {
+			if ( mainCamera == null ) {
 				throw new System.Exception("");
 			}
 
@@ -465,7 +468,7 @@ namespace FaceTrackerExample
 
 			// Unityのワールド座標系(3次元)に変換
 //			var vector3 = _Camera.ScreenToWorldPoint( vector2 );
-			var vector3 = Camera.main.ScreenToWorldPoint( vector2 );
+			var vector3 = mainCamera.ScreenToWorldPoint( vector2 );
 
 			// 座標の調整
 			// Y座標は逆、Z座標は0にする(Xもミラー状態によって逆にする必要あり)
