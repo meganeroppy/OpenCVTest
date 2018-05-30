@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 64182701944565252}
   - component: {fileID: 23935092070608412}
   - component: {fileID: 114003045059042974}
+  - component: {fileID: 114475177362433812}
+  - component: {fileID: 114344886327524784}
   m_Layer: 8
   m_Name: TargetMeshPlane
   m_TagString: Untagged
@@ -49,7 +51,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1001374032726872}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -92,7 +94,7 @@ MeshCollider:
   m_GameObject: {fileID: 1001374032726872}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -112,3 +114,25 @@ MonoBehaviour:
   myRenderer: {fileID: 23935092070608412}
   sortingLayerName: arObject
   sortingOrder: 0
+--- !u!114 &114344886327524784
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1001374032726872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d1189d89814430384161db405170ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114475177362433812
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1001374032726872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d1189d89814430384161db405170ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
