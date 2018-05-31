@@ -1,0 +1,19 @@
+CM_MicInput for SALSA is designed to be used in conjunction with 'SALSA with RandomEyes' as outlined in the workflow detailed on the CrazyMinnowStudio.com website:
+http://crazyminnowstudio.com/posts/real-time-microphone-input-for-salsa-lip-sync/
+
+The files and workflow are copyright:
+Crazy Minnow Studio, LLC
+CrazyMinnowStudio.com
+
+Package Contents
+----------------
+> Crazy Minnow Studio/SALSA with RandomEyes/Addons/
+	> micInput
+		- micInput.readme
+		> Scripts
+			- CM_MicInput.cs
+			> Editor
+				- CM_MicInputEditor.cs
+			
+Installation, release-notes, and instructional information can be found on our website:
+http://crazyminnowstudio.com/posts/real-time-microphone-input-for-salsa-lip-sync/
