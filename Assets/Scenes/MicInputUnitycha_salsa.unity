@@ -166,8 +166,8 @@ MonoBehaviour:
   sayMediumIndex: 0
   sayLargeIndex: 0
   saySmallTrigger: 0.0001
-  sayMediumTrigger: 0.0005
-  sayLargeTrigger: 0.003
+  sayMediumTrigger: 0.0002
+  sayLargeTrigger: 0.00029999999
   audioUpdateDelay: 0.08
   blendSpeed: 10
   rangeOfMotion: 100
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 235762504}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 235091795f01be64e9f0ce9959f2d908, type: 3}
   m_Name: 
