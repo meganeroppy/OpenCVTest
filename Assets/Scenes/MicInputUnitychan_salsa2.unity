@@ -113,6 +113,10 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &101688654 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400290, guid: 412b92d4feeb9c548bfa98f62c4d1022, type: 2}
+  m_PrefabInternal: {fileID: 1711844952}
 --- !u!1 &235762504 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100096, guid: 412b92d4feeb9c548bfa98f62c4d1022, type: 2}
@@ -142,51 +146,107 @@ MonoBehaviour:
   m_GameObject: {fileID: 235762504}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1976067524, guid: 7a255d2e87aae364fbd819c455094253, type: 3}
+  m_Script: {fileID: 11500000, guid: 4db7f1a7dafb99e47990e2ea16757dea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skinnedMeshRenderer: {fileID: 1792961404}
-  prevSkinnedMeshRenderer: {fileID: 1792961404}
-  getSkndMshRndr: 0
-  audioSrc: {fileID: 235762507}
-  audioClip: {fileID: 0}
-  blendShapes:
-  - blendShape1.MTH_SMILE1
-  - blendShape1.MTH_SMILE2
-  - blendShape1.MTH_SAP
-  - blendShape1.MTH_CONF
-  - blendShape1.MTH_ANG1
-  - blendShape1.MTH_ANG2
-  - blendShape1.MTH_A
-  - blendShape1.MTH_I
-  - blendShape1.MTH_U
-  - blendShape1.MTH_E
-  - blendShape1.MTH_O
-  saySmallIndex: 0
-  sayMediumIndex: 0
-  sayLargeIndex: 0
-  saySmallTrigger: 0.0001
-  sayMediumTrigger: 0.0002
-  sayLargeTrigger: 0.00029999999
-  audioUpdateDelay: 0.08
-  blendSpeed: 10
-  rangeOfMotion: 100
-  isTalking: 0
-  prevIsTalking: 0
-  lockShapes: 0
-  broadcast: 0
-  broadcastReceiversCount: 0
-  expandBroadcast: 0
-  broadcastReceivers: []
-  propagateToChildren: 0
-  average: 0
-  say: 
-  sayIndex: 0
-  sayAmount:
-    saySmall: 0
-    sayMedium: 0
-    sayLarge: 0
-  prevAudioUpdateDelay: 0
+  salsa3D: {fileID: 235762510}
+  saySmall:
+  - smr: {fileID: 1792961404}
+    lastSmr: {fileID: 1792961404}
+    shapeNameList:
+    - blendShape1.MTH_SMILE1
+    - blendShape1.MTH_SMILE2
+    - blendShape1.MTH_SAP
+    - blendShape1.MTH_CONF
+    - blendShape1.MTH_ANG1
+    - blendShape1.MTH_ANG2
+    - blendShape1.MTH_A
+    - blendShape1.MTH_I
+    - blendShape1.MTH_U
+    - blendShape1.MTH_E
+    - blendShape1.MTH_O
+    shapeIndex: 0
+    shapeName: blendShape1.MTH_SMILE1
+    shapePercent: 10
+    shapeValue: 0
+  sayMedium:
+  - smr: {fileID: 1792961404}
+    lastSmr: {fileID: 1792961404}
+    shapeNameList:
+    - blendShape1.MTH_SMILE1
+    - blendShape1.MTH_SMILE2
+    - blendShape1.MTH_SAP
+    - blendShape1.MTH_CONF
+    - blendShape1.MTH_ANG1
+    - blendShape1.MTH_ANG2
+    - blendShape1.MTH_A
+    - blendShape1.MTH_I
+    - blendShape1.MTH_U
+    - blendShape1.MTH_E
+    - blendShape1.MTH_O
+    shapeIndex: 0
+    shapeName: blendShape1.MTH_SMILE1
+    shapePercent: 30
+    shapeValue: 0
+  sayLarge:
+  - smr: {fileID: 1792961404}
+    lastSmr: {fileID: 1792961404}
+    shapeNameList:
+    - blendShape1.MTH_SMILE1
+    - blendShape1.MTH_SMILE2
+    - blendShape1.MTH_SAP
+    - blendShape1.MTH_CONF
+    - blendShape1.MTH_ANG1
+    - blendShape1.MTH_ANG2
+    - blendShape1.MTH_A
+    - blendShape1.MTH_I
+    - blendShape1.MTH_U
+    - blendShape1.MTH_E
+    - blendShape1.MTH_O
+    shapeIndex: 0
+    shapeName: blendShape1.MTH_SMILE1
+    shapePercent: 50
+    shapeValue: 0
+  jawShapes: []
+  jawBone: {fileID: 0}
+  jawRangeOfMotion: 0
+  eyeBoneUpAxis: 5
+  eyeBoneRightAxis: 1
+  eyelidBoneAxis: 3
+  jawBoneAxis: 2
+  eyelidControl: 0
+  eyeControl: 1
+  re3DEyes: {fileID: 0}
+  blink: []
+  lookUp: []
+  lookDown: []
+  lookLeft: []
+  lookRight: []
+  eyelidRangeOfMotion: 0.5
+  leftEyelidBone: {fileID: 0}
+  rightEyelidBone: {fileID: 0}
+  leftEyeBone: {fileID: 614568241}
+  rightEyeBone: {fileID: 101688654}
+  jawBoneNames:
+  - jaw
+  leftEyelidBoneNames:
+  - uplid.l
+  rightEyelidBoneNames:
+  - uplid.r
+  leftEyeBoneNames:
+  - lEye
+  - lefteye
+  - eye.l
+  rightEyeBoneNames:
+  - rEye
+  - righteye
+  - eye.r
+  re3DExpressions: {fileID: 0}
+  otherSMRs: []
+  initialize: 0
+  showSmall: 1
+  showMedium: 1
+  showLarge: 1
 --- !u!82 &235762507
 AudioSource:
   m_ObjectHideFlags: 0
@@ -274,7 +334,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 235762504}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 235091795f01be64e9f0ce9959f2d908, type: 3}
   m_Name: 
@@ -293,9 +353,55 @@ MonoBehaviour:
   HeadInhaleAngle: 0.5
   HeadExhaleAngle: -0.5
   InhalingMethod: 0
+--- !u!114 &235762510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 235762504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1976067524, guid: 7a255d2e87aae364fbd819c455094253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skinnedMeshRenderer: {fileID: 0}
+  prevSkinnedMeshRenderer: {fileID: 0}
+  getSkndMshRndr: 0
+  audioSrc: {fileID: 235762507}
+  audioClip: {fileID: 0}
+  blendShapes: []
+  saySmallIndex: 0
+  sayMediumIndex: 0
+  sayLargeIndex: 0
+  saySmallTrigger: 0.0001
+  sayMediumTrigger: 0.0002
+  sayLargeTrigger: 0.00029999999
+  audioUpdateDelay: 0.08
+  blendSpeed: 10
+  rangeOfMotion: 100
+  isTalking: 0
+  prevIsTalking: 0
+  lockShapes: 0
+  broadcast: 0
+  broadcastReceiversCount: 0
+  expandBroadcast: 0
+  broadcastReceivers: []
+  propagateToChildren: 0
+  average: 0
+  say: 
+  sayIndex: 0
+  sayAmount:
+    saySmall: 0
+    sayMedium: 0
+    sayLarge: 0
+  prevAudioUpdateDelay: 0
 --- !u!4 &556295380 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400022, guid: 412b92d4feeb9c548bfa98f62c4d1022, type: 2}
+  m_PrefabInternal: {fileID: 1711844952}
+--- !u!4 &614568241 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400312, guid: 412b92d4feeb9c548bfa98f62c4d1022, type: 2}
   m_PrefabInternal: {fileID: 1711844952}
 --- !u!1 &684752423
 GameObject:
@@ -378,6 +484,47 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1056006775
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1056006776}
+  - component: {fileID: 1056006777}
+  m_Layer: 0
+  m_Name: RandomEyes3D_Eye_Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1056006776
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1056006775}
+  m_LocalRotation: {x: 0.4570364, y: -0.51907456, z: 0.47192225, w: 0.5467804}
+  m_LocalPosition: {x: 1.2894589, y: -0.1632804, z: -0.013468154}
+  m_LocalScale: {x: 0.9999982, y: 0.9999991, z: 0.9999986}
+  m_Children: []
+  m_Father: {fileID: 556295380}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1056006777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1056006775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -818653955, guid: 7a255d2e87aae364fbd819c455094253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showGizmo: 1
 --- !u!1 &1572208901
 GameObject:
   m_ObjectHideFlags: 0
@@ -467,6 +614,18 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100322, guid: 412b92d4feeb9c548bfa98f62c4d1022, type: 2}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 13700024, guid: 412b92d4feeb9c548bfa98f62c4d1022, type: 2}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 13700024, guid: 412b92d4feeb9c548bfa98f62c4d1022, type: 2}
+      propertyPath: m_AABB.m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 13700024, guid: 412b92d4feeb9c548bfa98f62c4d1022, type: 2}
+      propertyPath: m_DynamicOccludee
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
