@@ -13,6 +13,8 @@ public class UDPReceive : MonoBehaviour
 	static UdpClient udp;
 	Thread thread;
 
+	public static string text { private set; get;}
+
 	void Start ()
 	{
 		udp = new UdpClient(LOCA_LPORT);
@@ -36,7 +38,7 @@ public class UDPReceive : MonoBehaviour
 		{
 			IPEndPoint remoteEP = null;
 			byte[] data = udp.Receive(ref remoteEP);
-			string text = Encoding.ASCII.GetString(data);
+			text = Encoding.ASCII.GetString(data);
 			Debug.Log(text);
 		}
 	} 

@@ -8,7 +8,8 @@ public class CameraController : MonoBehaviour
 
 	enum Movement
 	{
-		ReferFaceTracking,
+		ReferInternalFaceTracking,
+		ReferExternalFaceTracking,
 		ReferObject,
 		MousePosition,
 		Input,
@@ -62,8 +63,8 @@ public class CameraController : MonoBehaviour
 
 		float x = 0, y = 0;
 
-		// フェイストラッキング値を使用
-		if( myMovement == Movement.ReferFaceTracking )
+		// OpenCVForUnityを使用したフェイストラッキング値を使用
+		if( myMovement == Movement.ReferInternalFaceTracking )
 		{
 			// とりあえず0番目の値を使う
 			CopyTransformSource source = null;
@@ -82,7 +83,28 @@ public class CameraController : MonoBehaviour
 			//x = input.x += Input.GetAxis("Horizontal") * Time.deltaTime * spinSpeed;
 			//y = input.y += Input.GetAxis("Vertical") * Time.deltaTime * spinSpeed;
 		}
-			
+
+		// UDP経由で外部アプリケーションから受け取った値フェイストラッキング値を使用
+		if( myMovement == Movement.ReferInternalFaceTracking )
+		{
+			// とりあえず0番目の値を使う
+			CopyTransformSource source = null;
+			if( CopyTransformSource.list != null && CopyTransformSource.list.Count >= 1 )
+			{
+				source = CopyTransformSource.list[0];
+			}
+
+			if( source == null ) return;
+
+			x = Mathf.InverseLerp( -refferedObjectRate, refferedObjectRate, source.transform.position.x);
+			y = Mathf.InverseLerp( -refferedObjectRate, refferedObjectRate, source.transform.position.y);
+
+			//Debug.Log( source.transform.position.x.ToString() + ", " + source.transform.position.y.ToString() + "  ->  " + x.ToString() + ", " + y.ToString() );
+
+			//x = input.x += Input.GetAxis("Horizontal") * Time.deltaTime * spinSpeed;
+			//y = input.y += Input.GetAxis("Vertical") * Time.deltaTime * spinSpeed;
+		}
+
 		// 入力値を使用
 		else if( myMovement == Movement.Input )
 		{
