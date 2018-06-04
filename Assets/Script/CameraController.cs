@@ -33,6 +33,26 @@ public class CameraController : MonoBehaviour
 	[SerializeField]
 	Vector2 offsetLimit = Vector2.one * 1;
 
+	/// <summary>
+	/// 最低値 目算約200
+	/// </summary>
+	[SerializeField]
+	float extPosXMin = 200f;
+
+	/// <summary>
+	/// 最高値 目算約1000
+	/// </summary>
+	[SerializeField]
+	float extPosXMax = 1000f;
+
+	/// <summary>
+	/// 中央値
+	/// </summary>
+	float extPosXMid;
+
+	[SerializeField]
+	bool extPosXReverse = true;
+
 	[SerializeField]
 	bool log = false;
 
@@ -85,24 +105,18 @@ public class CameraController : MonoBehaviour
 		}
 
 		// UDP経由で外部アプリケーションから受け取った値フェイストラッキング値を使用
-		if( myMovement == Movement.ReferInternalFaceTracking )
+		else if( myMovement == Movement.ReferExternalFaceTracking )
 		{
-			// とりあえず0番目の値を使う
-			CopyTransformSource source = null;
-			if( CopyTransformSource.list != null && CopyTransformSource.list.Count >= 1 )
+			extPosXMid =  extPosXMin + ((extPosXMax - extPosXMin) * 0.5f);
+
+			var posX = UDPParser.parsedData.x - extPosXMid;
+			if( extPosXReverse )
 			{
-				source = CopyTransformSource.list[0];
+				posX *= -1;
 			}
 
-			if( source == null ) return;
-
-			x = Mathf.InverseLerp( -refferedObjectRate, refferedObjectRate, source.transform.position.x);
-			y = Mathf.InverseLerp( -refferedObjectRate, refferedObjectRate, source.transform.position.y);
-
-			//Debug.Log( source.transform.position.x.ToString() + ", " + source.transform.position.y.ToString() + "  ->  " + x.ToString() + ", " + y.ToString() );
-
-			//x = input.x += Input.GetAxis("Horizontal") * Time.deltaTime * spinSpeed;
-			//y = input.y += Input.GetAxis("Vertical") * Time.deltaTime * spinSpeed;
+			x = Mathf.InverseLerp( -refferedObjectRate, refferedObjectRate, posX);
+			y = Mathf.InverseLerp( -refferedObjectRate, refferedObjectRate, UDPParser.parsedData.y);
 		}
 
 		// 入力値を使用
