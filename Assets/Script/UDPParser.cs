@@ -10,7 +10,7 @@ public class UDPParser : MonoBehaviour
 	string data = null;
 
 	[HideInInspector]
-	public Vector2 parsedData = Vector2.zero;
+	public static Vector2 parsedData = Vector2.zero;
 
 	// Update is called once per frame
 	void Update () 

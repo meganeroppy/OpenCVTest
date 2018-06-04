@@ -604,7 +604,7 @@ Camera:
   m_GameObject: {fileID: 684752423}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 3
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0.019607844}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -658,10 +658,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1572208902}
   spinSpeed: 1
-  myMovement: 0
+  myMovement: 1
   referredObject: {fileID: 2070281571}
   refferedObjectRate: 2000
   offsetLimit: {x: 0.3, y: 0.1}
+  extPosXMin: 200
+  extPosXMax: 1000
+  extPosXReverse: 1
   log: 0
 --- !u!1 &751411269
 GameObject:
@@ -868,7 +871,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   source: {fileID: 910216307}
-  parsedData: {x: 0, y: 0}
 --- !u!1 &1216475356
 GameObject:
   m_ObjectHideFlags: 0
@@ -1595,7 +1597,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &1871338436
 AudioListener:
   m_ObjectHideFlags: 0
