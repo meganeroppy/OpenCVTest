@@ -6,12 +6,5 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/FaceTrackerExample/Scenes/FaceTrackerExample.unity
-  - enabled: 1
-    path: Assets/FaceTrackerExample/Scenes/ShowLicense.unity
-  - enabled: 1
-    path: Assets/FaceTrackerExample/Scenes/Texture2DFaceTrackerExample.unity
-  - enabled: 1
-    path: Assets/FaceTrackerExample/Scenes/WebCamTextureFaceTrackerExample.unity
-  - enabled: 1
-    path: Assets/FaceTrackerExample/Scenes/FaceTrackerARExample.unity
+    path: Assets/Scenes/TestInternal.unity
+    guid: 131ac309c40fe459f852833d3b7c47c3
