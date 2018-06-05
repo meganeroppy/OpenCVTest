@@ -13,7 +13,7 @@ TagManager:
   - UI
   - 
   - 
-  - Quad
+  - 
   - 
   - 
   - 
@@ -40,7 +40,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: arObject
-    uniqueID: 2317311035
     locked: 0
