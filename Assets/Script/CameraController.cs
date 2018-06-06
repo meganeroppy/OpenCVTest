@@ -52,7 +52,7 @@ public class CameraController : MonoBehaviour
     Vector2 intPosMid = Vector2.zero;
 
     [SerializeField]
-    float intDataLerpRate = 400f;
+    float intDataRate = 400f;
 
     /// <summary>
     /// 最低値 目算約200
@@ -113,8 +113,12 @@ public class CameraController : MonoBehaviour
 		// OpenCVForUnityを使用したフェイストラッキング値を使用
 		if( myMovement == Movement.ReferInternalFaceTracking )
 		{
-			// とりあえず0番目の値を使う
-			CopyTransformSource source = null;
+            // 中央値を計算
+            intPosMid.x = intPosMin.x + (Mathf.Abs(intPosMax.x - intPosMin.x) * 0.5f);
+            intPosMid.y = intPosMin.y + (Mathf.Abs(intPosMax.y - intPosMin.y) * 0.5f);
+
+            // 0番目の値を使う
+            CopyTransformSource source = null;
 			if( CopyTransformSource.list != null && CopyTransformSource.list.Count >= 1 )
 			{
 				source = CopyTransformSource.list[0];
@@ -125,30 +129,39 @@ public class CameraController : MonoBehaviour
             var posX = source.transform.position.x;
             var posY = source.transform.position.y;
 
-            Debug.Log(string.Format("fixed data = {0}, {1}", posX, posY));
+        //    Debug.Break();
 
-            intPosMid.x = intPosMin.x + ( Mathf.Abs(intPosMax.x - intPosMin.x) * 0.5f);
-            intPosMid.y = intPosMin.y + ( Mathf.Abs(intPosMax.y - intPosMin.y) * 0.5f);
-
-            posX -= extPosMid.x;
+        //    posX -= intPosMid.x;
         //    if (extPosXReverse)
         //    {
         //        posX *= -1;
         //    }
 
-            posY -= extPosMid.y;
-        //    if (extPosYReverse)
-        //    {
-        //        posY *= -1;
-        //    }
+        //    posY -= intPosMid.y;
+            //    if (extPosYReverse)
+            //    {
+            //        posY *= -1;
+            //    }
 
-            x = Mathf.InverseLerp(intPosMin.x, intPosMax.x, posX);
-			y = Mathf.InverseLerp(intPosMin.y, intPosMax.y, posY);
-		}
+            Debug.Log(string.Format("fixed data = {0}, {1}", posX, posY));
 
-		// UDP経由で外部アプリケーションから受け取った値フェイストラッキング値を使用
-		else if( myMovement == Movement.ReferExternalFaceTracking )
+            // x,yそれぞれを0~1の値に補間する
+        //  x = Mathf.InverseLerp(intPosMin.x, intPosMax.x, posX);
+		//	y = Mathf.InverseLerp(intPosMin.y, intPosMax.y, posY);
+
+            // x,yそれぞれを-0.5~0.5の値に補間する
+            posX = Mathf.InverseLerp(intPosMin.x, intPosMax.x, posX) -.5f;
+            posY = Mathf.InverseLerp(intPosMin.y, intPosMax.y, posY) -.5f;
+
+            // 倍率適用し、0~1の範囲にする
+            x = posX * intDataRate + 0.5f;
+            y = posY * intDataRate + 0.5f;
+        }
+
+        // UDP経由で外部アプリケーションから受け取った値フェイストラッキング値を使用
+        else if( myMovement == Movement.ReferExternalFaceTracking )
 		{
+            // 中央値を計算
             extPosMid.x = extPosMin.x + ((extPosMax.x - extPosMin.x) * 0.5f);
             extPosMid.y = extPosMin.y + ((extPosMax.y - extPosMin.y) * 0.5f);
 
