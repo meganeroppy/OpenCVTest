@@ -12,6 +12,9 @@ public class UDPParser : MonoBehaviour
 	[HideInInspector]
 	public static Vector2 parsedData = Vector2.zero;
 
+    [SerializeField]
+    bool showLog = false;
+
 	// Update is called once per frame
 	void Update () 
 	{
@@ -45,6 +48,7 @@ public class UDPParser : MonoBehaviour
 			}
 		}
 
-		Debug.Log( parsedData );
+        if( showLog )
+    		Debug.Log( parsedData );
 	}
 }

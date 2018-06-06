@@ -37,23 +37,29 @@ public class CameraController : MonoBehaviour
 	/// 最低値 目算約200
 	/// </summary>
 	[SerializeField]
-	float extPosXMin = 200f;
+	Vector2 extPosMin = new Vector2(200f, 100f);
 
 	/// <summary>
 	/// 最高値 目算約1000
 	/// </summary>
 	[SerializeField]
-	float extPosXMax = 1000f;
+	Vector2 extPosMax = new Vector2( 1000f, 400f);
 
-	/// <summary>
-	/// 中央値
-	/// </summary>
-	float extPosXMid;
+    [SerializeField]
+    float extDataLerpRate = 400f;
+
+    /// <summary>
+    /// 中央値
+    /// </summary>
+    Vector2 extPosMid = Vector2.zero;
 
 	[SerializeField]
 	bool extPosXReverse = true;
 
-	[SerializeField]
+    [SerializeField]
+    bool extPosYReverse = true;
+
+    [SerializeField]
 	bool log = false;
 
     // Use this for initialization
@@ -95,8 +101,13 @@ public class CameraController : MonoBehaviour
 
 			if( source == null ) return;
 
-			x = Mathf.InverseLerp( -refferedObjectRate, refferedObjectRate, source.transform.position.x);
-			y = Mathf.InverseLerp( -refferedObjectRate, refferedObjectRate, source.transform.position.y);
+            var posX = source.transform.position.x;
+            var posY = source.transform.position.y;
+
+            Debug.Log(string.Format("fixed data = {0}, {1}", posX, posY));
+
+            x = Mathf.InverseLerp( -refferedObjectRate, refferedObjectRate, posX);
+			y = Mathf.InverseLerp( -refferedObjectRate, refferedObjectRate, posY);
 
 			//Debug.Log( source.transform.position.x.ToString() + ", " + source.transform.position.y.ToString() + "  ->  " + x.ToString() + ", " + y.ToString() );
 
@@ -107,16 +118,25 @@ public class CameraController : MonoBehaviour
 		// UDP経由で外部アプリケーションから受け取った値フェイストラッキング値を使用
 		else if( myMovement == Movement.ReferExternalFaceTracking )
 		{
-			extPosXMid =  extPosXMin + ((extPosXMax - extPosXMin) * 0.5f);
+            extPosMid.x = extPosMin.x + ((extPosMax.x - extPosMin.x) * 0.5f);
+            extPosMid.y = extPosMin.y + ((extPosMax.y - extPosMin.y) * 0.5f);
 
-			var posX = UDPParser.parsedData.x - extPosXMid;
+            var posX = UDPParser.parsedData.x - extPosMid.x;
 			if( extPosXReverse )
 			{
 				posX *= -1;
 			}
 
-			x = Mathf.InverseLerp( -refferedObjectRate, refferedObjectRate, posX);
-			y = Mathf.InverseLerp( -refferedObjectRate, refferedObjectRate, UDPParser.parsedData.y);
+            var posY = UDPParser.parsedData.y - extPosMid.y;
+            if (extPosYReverse)
+            {
+                posY *= -1;
+            }
+
+            Debug.Log(string.Format("fixed data = {0}, {1}", posX, posY));
+
+			x = Mathf.InverseLerp( -extDataLerpRate, extDataLerpRate, posX);
+			y = Mathf.InverseLerp( -extDataLerpRate, extDataLerpRate, posY);
 		}
 
 		// 入力値を使用
@@ -161,7 +181,7 @@ public class CameraController : MonoBehaviour
         pos *= nowPos.z;
 
         pos.y += nowPos.y;
-        pos.x += nowPos.x; // if u need a formula,pls remove comment tag.
+        //pos.x += nowPos.x; // if u need a formula,pls remove comment tag.
 
 		transform.position = pos + target.position;
 	//	transform.position = pos;
