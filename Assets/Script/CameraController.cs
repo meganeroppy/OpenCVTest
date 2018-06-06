@@ -33,10 +33,31 @@ public class CameraController : MonoBehaviour
 	[SerializeField]
 	Vector2 offsetLimit = Vector2.one * 1;
 
-	/// <summary>
-	/// 最低値 目算約200
-	/// </summary>
-	[SerializeField]
+    /// <summary>
+    /// 最低値 目算約200
+    /// </summary>
+    [SerializeField]
+    Vector2 intPosMin = new Vector2(-700f, -100f);
+
+    /// <summary>
+    /// 最高値 目算約1000
+    /// </summary>
+    [SerializeField]
+    Vector2 intPosMax = new Vector2(0f, 300f);
+
+
+    /// <summary>
+    /// 中央値
+    /// </summary>
+    Vector2 intPosMid = Vector2.zero;
+
+    [SerializeField]
+    float intDataLerpRate = 400f;
+
+    /// <summary>
+    /// 最低値 目算約200
+    /// </summary>
+    [SerializeField]
 	Vector2 extPosMin = new Vector2(200f, 100f);
 
 	/// <summary>
@@ -106,13 +127,23 @@ public class CameraController : MonoBehaviour
 
             Debug.Log(string.Format("fixed data = {0}, {1}", posX, posY));
 
-            x = Mathf.InverseLerp( -refferedObjectRate, refferedObjectRate, posX);
-			y = Mathf.InverseLerp( -refferedObjectRate, refferedObjectRate, posY);
+            intPosMid.x = intPosMin.x + ( Mathf.Abs(intPosMax.x - intPosMin.x) * 0.5f);
+            intPosMid.y = intPosMin.y + ( Mathf.Abs(intPosMax.y - intPosMin.y) * 0.5f);
 
-			//Debug.Log( source.transform.position.x.ToString() + ", " + source.transform.position.y.ToString() + "  ->  " + x.ToString() + ", " + y.ToString() );
+            posX -= extPosMid.x;
+        //    if (extPosXReverse)
+        //    {
+        //        posX *= -1;
+        //    }
 
-			//x = input.x += Input.GetAxis("Horizontal") * Time.deltaTime * spinSpeed;
-			//y = input.y += Input.GetAxis("Vertical") * Time.deltaTime * spinSpeed;
+            posY -= extPosMid.y;
+        //    if (extPosYReverse)
+        //    {
+        //        posY *= -1;
+        //    }
+
+            x = Mathf.InverseLerp(intPosMin.x, intPosMax.x, posX);
+			y = Mathf.InverseLerp(intPosMin.y, intPosMax.y, posY);
 		}
 
 		// UDP経由で外部アプリケーションから受け取った値フェイストラッキング値を使用

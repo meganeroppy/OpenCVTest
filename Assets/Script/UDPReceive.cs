@@ -25,7 +25,6 @@ public class UDPReceive : MonoBehaviour
 
 	void Update ()
 	{
-        Debug.Log(System.Reflection.MethodBase.GetCurrentMethod());
 	}
 
 	void OnApplicationQuit()
