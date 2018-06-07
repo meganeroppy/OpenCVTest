@@ -134,25 +134,7 @@ public class CameraController : MonoBehaviour
             var posX = source.transform.position.x;
             var posY = source.transform.position.y;
 
-        //    Debug.Break();
-
-        //    posX -= intPosMid.x;
-        //    if (extPosXReverse)
-        //    {
-        //        posX *= -1;
-        //    }
-
-        //    posY -= intPosMid.y;
-            //    if (extPosYReverse)
-            //    {
-            //        posY *= -1;
-            //    }
-
-            Debug.Log(string.Format("fixed data = {0}, {1}", posX, posY));
-
-            // x,yそれぞれを0~1の値に補間する
-        //  x = Mathf.InverseLerp(intPosMin.x, intPosMax.x, posX);
-		//	y = Mathf.InverseLerp(intPosMin.y, intPosMax.y, posY);
+         //   Debug.Log(string.Format("fixed data = {0}, {1}", posX, posY));
 
             // x,yそれぞれを-0.5~0.5の値に補間する
             posX = Mathf.InverseLerp(intPosMin.x, intPosMax.x, posX) -.5f;
