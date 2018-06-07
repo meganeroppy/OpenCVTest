@@ -54,8 +54,9 @@ GameObject:
   - component: {fileID: 4214246142661070}
   - component: {fileID: 198738261106559740}
   - component: {fileID: 199284451908391344}
+  - component: {fileID: 114339826655095322}
   m_Layer: 0
-  m_Name: PoppingPetal 1
+  m_Name: PoppingPetal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -182,6 +183,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114339826655095322
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1474778139383018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fb91fa45cef8cd4eaac89cd3ce8c60e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198097267738599790
 ParticleSystem:
   m_ObjectHideFlags: 1
