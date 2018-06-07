@@ -862,7 +862,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967039
+    m_Bits: 4294962943
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1130,7 +1130,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294965759
+    m_Bits: 4294963711
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -3437,9 +3437,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea056dbe55c615945962bedb04c4a611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 198738261106559740, guid: 1e381e71c0adc584e9e3d10b610c5df2, type: 2}
-  min: {x: -0.5, y: 0.5, z: -0.1}
-  max: {x: 0.5, y: 1.5, z: 0.5}
+  effectAudiencePrefab: {fileID: 198738261106559740, guid: 1e381e71c0adc584e9e3d10b610c5df2,
+    type: 2}
+  effectTuberPrefab: {fileID: 198738261106559740, guid: 3507a83babf518146b92ce19984d373d,
+    type: 2}
+  minAudience: {x: -0.5, y: 0.5, z: -0.1}
+  maxAudience: {x: 0.5, y: 1.5, z: 0.5}
+  minTuber: {x: -3, y: 0, z: -15}
+  maxTuber: {x: 3, y: 0, z: -6}
 --- !u!4 &1979396548
 Transform:
   m_ObjectHideFlags: 0
