@@ -903,9 +903,10 @@ MonoBehaviour:
   myMovement: 0
   referredObject: {fileID: 2070281571}
   refferedObjectRate: 2000
+  moveSpeed: 0.8
   offsetLimit: {x: 0.3, y: 0.1}
-  intPosMin: {x: -250, y: 150}
-  intPosMax: {x: -100, y: 250}
+  intPosMin: {x: -700, y: 150}
+  intPosMax: {x: 300, y: 250}
   intDataRate: 0.5
   extPosMin: {x: 200, y: 100}
   extPosMax: {x: 1000, y: 400}

@@ -30,6 +30,11 @@ public class CameraController : MonoBehaviour
 	Vector2 input = Vector2.zero;
 	Vector2 center = Vector2.one * 0.5f;
 
+    [SerializeField]
+    float moveSpeed = 1f;
+
+    Vector3 targetPos = Vector3.zero;
+
 	[SerializeField]
 	Vector2 offsetLimit = Vector2.one * 1;
 
@@ -225,10 +230,31 @@ public class CameraController : MonoBehaviour
         pos *= nowPos.z;
 
         pos.y += nowPos.y;
-        //pos.x += nowPos.x; // if u need a formula,pls remove comment tag.
+        // pos.x += nowPos.x; // if u need a formula,pls remove comment tag.
 
-		transform.position = pos + target.position;
-	//	transform.position = pos;
-        transform.LookAt(target.position);
+        // 目標位置をセット
+        targetPos = pos + target.position;
+
+        // ターゲット位置に移動しようとする
+        {
+            // 目標位置までの距離
+            var distance = Vector3.Distance(transform.position, targetPos);
+
+            // 目標座標が最大移動距離以下ならその位置まで移動
+            var moveSpeedPerFrame = moveSpeed * Time.deltaTime;
+            if (distance <= moveSpeedPerFrame)
+            {
+                transform.position = targetPos;
+            }
+            else
+            {
+              // 向きを正規化
+                var direction = (targetPos - transform.position).normalized;
+                transform.position += direction * moveSpeed * Time.deltaTime;
+            }
+
+            //	transform.position = pos;
+            transform.LookAt(target.position);
+        }
     }
 }
