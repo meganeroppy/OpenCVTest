@@ -302,7 +302,7 @@ PlayerSettings:
     m_Enabled: 0
     m_Devices: []
   - m_BuildTarget: Standalone
-    m_Enabled: 0
+    m_Enabled: 1
     m_Devices:
     - OpenVR
   - m_BuildTarget: Tizen
@@ -717,7 +717,7 @@ PlayerSettings:
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
   cloudProjectId: de7ffc7c-0d95-4876-b5b1-d212fa025fac
-  projectName: 
+  projectName: OpenCVTest
   organizationId: modeki-kentaro
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
