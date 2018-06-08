@@ -13,9 +13,10 @@ public class CameraController : MonoBehaviour
 		ReferObject,
 		MousePosition,
 		Input,
-	}
+        ReferInternalFaceTrackingDlib,
+    }
 
-	[SerializeField]
+    [SerializeField]
 	Movement myMovement = Movement.MousePosition;
 
 	[SerializeField]
@@ -189,9 +190,40 @@ public class CameraController : MonoBehaviour
 			y = mouse.y;
 		}
 
-		// オブジェクトの位置を参照
-		else
-		{
+        // OpenCVForUnityを使用したフェイストラッキング値を使用 dlib使用版
+        if (myMovement == Movement.ReferInternalFaceTrackingDlib)
+        {
+            int w = 640;
+            int h = 480;
+            // 中央値を計算
+            intPosMid.x = w * 0.5f;
+            intPosMid.y = h * 0.5f;
+
+            // 0番目の値を使う
+            var detect =DlibFaceLandmarkDetectorExample.WebCamTextureToMatHelperExample.instance;
+            if (detect == null) return;
+            var rects = detect.detectResult;
+            if (rects == null || rects.Count < 1) return;
+            var pos = rects[0];
+
+            var posX = pos.center.x;
+            var posY = pos.center.y;
+
+            if (log)
+                Debug.Log(string.Format("fixed data = {0}, {1}", posX, posY));
+
+            // x,yそれぞれを-0.5~0.5の値に補間する
+            posX = Mathf.InverseLerp(0, w, posX) - .5f;
+            posY = Mathf.InverseLerp(0, h, posY) - .5f;
+
+            // 倍率適用し、0~1の範囲にする
+            x = posX * intDataRate + 0.5f;
+            y = posY * intDataRate + 0.5f;
+        }
+
+        // オブジェクトの位置を参照
+        else
+        {
 			x = referredObject.position.x;
 			y = referredObject.position.y;
 		}
