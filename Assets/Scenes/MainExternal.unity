@@ -688,9 +688,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 644602807}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1059857887, guid: 40925757837f9fc4595378e75c748415, type: 3}
+  m_Script: {fileID: 1059857887, guid: f0791f3db01b24b408afbef6767d37a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SubjectName: Skeleton
+  ServerHost: localhost:3883
+  UpdateScaleFromStream: 1
+  IsStreamYUp: 1
+  InputScale: 0.01
 --- !u!1 &684752423
 GameObject:
   m_ObjectHideFlags: 0
@@ -1790,7 +1795,7 @@ Prefab:
         type: 2}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 9100000, guid: c6d87a920578f374899637126e9436ce, type: 2}
     - target: {fileID: 114903812944871534, guid: 40dc8a17bb5cbe14f9ed7f65da38d5fc,
         type: 2}
       propertyPath: m_Enabled
@@ -1807,6 +1812,11 @@ Prefab:
     - target: {fileID: 1711226265968274, guid: 40dc8a17bb5cbe14f9ed7f65da38d5fc, type: 2}
       propertyPath: m_Name
       value: unitychan
+      objectReference: {fileID: 0}
+    - target: {fileID: 95918374560416568, guid: 40dc8a17bb5cbe14f9ed7f65da38d5fc,
+        type: 2}
+      propertyPath: m_ApplyRootMotion
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114733102324784462, guid: 40dc8a17bb5cbe14f9ed7f65da38d5fc, type: 2}
