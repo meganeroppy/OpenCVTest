@@ -620,7 +620,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 235762504}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1059857887, guid: 40925757837f9fc4595378e75c748415, type: 3}
+  m_Script: {fileID: 1059857887, guid: f0791f3db01b24b408afbef6767d37a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SubjectName: Skeleton
@@ -731,6 +731,37 @@ Transform:
   m_PrefabParentObject: {fileID: 4784039660421980, guid: 40dc8a17bb5cbe14f9ed7f65da38d5fc,
     type: 2}
   m_PrefabInternal: {fileID: 1217635463}
+--- !u!1 &440192706
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1453313769920022, guid: 40dc8a17bb5cbe14f9ed7f65da38d5fc,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 440192707}
+  m_Layer: 10
+  m_Name: BodyCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &440192707
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4369431634461106, guid: 40dc8a17bb5cbe14f9ed7f65da38d5fc,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 440192706}
+  m_LocalRotation: {x: 0.0000000037252899, y: -0.000000004190951, z: 0.000000021274898,
+    w: 1}
+  m_LocalPosition: {x: 0.492, y: 0.027, z: -0.001}
+  m_LocalScale: {x: 0.99999934, y: 0.99999875, z: 0.9999985}
+  m_Children: []
+  m_Father: {fileID: 418409258}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &550330019
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,7 +901,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -897,7 +928,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 684752423}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.5}
+  m_LocalPosition: {x: 0, y: 0, z: -1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -914,22 +945,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9e1581a84d7c074aaec23a61c0223e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1317750024}
+  target: {fileID: 440192707}
   spinSpeed: 1
   myMovement: 0
   referredObject: {fileID: 2070281571}
   refferedObjectRate: 2000
   moveSpeed: 0.8
-  offsetLimit: {x: 0.3, y: 0.1}
-  intPosMin: {x: -700, y: 150}
-  intPosMax: {x: 300, y: 250}
+  offsetLimit: {x: 0.4, y: 0.05}
+  intPosMin: {x: -400, y: 150}
+  intPosMax: {x: 150, y: 250}
   intDataRate: 0.5
   extPosMin: {x: 200, y: 100}
   extPosMax: {x: 1000, y: 400}
   extDataLerpRate: 400
   extPosXReverse: 0
   extPosYReverse: 1
-  log: 0
+  log: 1
 --- !u!1 &751411269
 GameObject:
   m_ObjectHideFlags: 0
@@ -2210,7 +2241,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1217635464}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1059857887, guid: 40925757837f9fc4595378e75c748415, type: 3}
+  m_Script: {fileID: 1059857887, guid: f0791f3db01b24b408afbef6767d37a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SubjectName: Skeleton

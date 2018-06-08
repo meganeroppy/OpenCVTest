@@ -134,7 +134,8 @@ public class CameraController : MonoBehaviour
             var posX = source.transform.position.x;
             var posY = source.transform.position.y;
 
-         //   Debug.Log(string.Format("fixed data = {0}, {1}", posX, posY));
+            if( log )
+                Debug.Log(string.Format("fixed data = {0}, {1}", posX, posY));
 
             // x,yそれぞれを-0.5~0.5の値に補間する
             posX = Mathf.InverseLerp(intPosMin.x, intPosMax.x, posX) -.5f;
@@ -149,8 +150,8 @@ public class CameraController : MonoBehaviour
         else if( myMovement == Movement.ReferExternalFaceTracking )
 		{
             // 中央値を計算
-            extPosMid.x = extPosMin.x + ((extPosMax.x - extPosMin.x) * 0.5f);
-            extPosMid.y = extPosMin.y + ((extPosMax.y - extPosMin.y) * 0.5f);
+            extPosMid.x = extPosMin.x + (Mathf.Abs(extPosMax.x - extPosMin.x) * 0.5f);
+            extPosMid.y = extPosMin.y + (Mathf.Abs(extPosMax.y - extPosMin.y) * 0.5f);
 
             var posX = UDPParser.parsedData.x - extPosMid.x;
 			if( extPosXReverse )
@@ -164,7 +165,8 @@ public class CameraController : MonoBehaviour
                 posY *= -1;
             }
 
-            Debug.Log(string.Format("fixed data = {0}, {1}", posX, posY));
+            if (log)
+                Debug.Log(string.Format("fixed data = {0}, {1}", posX, posY));
 
 			x = Mathf.InverseLerp( -extDataLerpRate, extDataLerpRate, posX);
 			y = Mathf.InverseLerp( -extDataLerpRate, extDataLerpRate, posY);
