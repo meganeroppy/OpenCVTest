@@ -115,31 +115,31 @@ public class CameraController : MonoBehaviour
 
 		float x = 0, y = 0;
 
-		// OpenCVForUnityを使用したフェイストラッキング値を使用
-		if( myMovement == Movement.ReferInternalFaceTracking )
-		{
+        // OpenCVForUnityを使用したフェイストラッキング値を使用
+        if (myMovement == Movement.ReferInternalFaceTracking)
+        {
             // 中央値を計算
             intPosMid.x = intPosMin.x + (Mathf.Abs(intPosMax.x - intPosMin.x) * 0.5f);
             intPosMid.y = intPosMin.y + (Mathf.Abs(intPosMax.y - intPosMin.y) * 0.5f);
 
             // 0番目の値を使う
             CopyTransformSource source = null;
-			if( CopyTransformSource.list != null && CopyTransformSource.list.Count >= 1 )
-			{
-				source = CopyTransformSource.list[0];
-			}
+            if (CopyTransformSource.list != null && CopyTransformSource.list.Count >= 1)
+            {
+                source = CopyTransformSource.list[0];
+            }
 
-			if( source == null ) return;
+            if (source == null) return;
 
             var posX = source.transform.position.x;
             var posY = source.transform.position.y;
 
-            if( log )
+            if (log)
                 Debug.Log(string.Format("fixed data = {0}, {1}", posX, posY));
 
             // x,yそれぞれを-0.5~0.5の値に補間する
-            posX = Mathf.InverseLerp(intPosMin.x, intPosMax.x, posX) -.5f;
-            posY = Mathf.InverseLerp(intPosMin.y, intPosMax.y, posY) -.5f;
+            posX = Mathf.InverseLerp(intPosMin.x, intPosMax.x, posX) - .5f;
+            posY = Mathf.InverseLerp(intPosMin.y, intPosMax.y, posY) - .5f;
 
             // 倍率適用し、0~1の範囲にする
             x = posX * intDataRate + 0.5f;
@@ -147,29 +147,44 @@ public class CameraController : MonoBehaviour
         }
 
         // UDP経由で外部アプリケーションから受け取った値フェイストラッキング値を使用
-        else if( myMovement == Movement.ReferExternalFaceTracking )
-		{
+        else if (myMovement == Movement.ReferExternalFaceTracking)
+        {
             // 中央値を計算
             extPosMid.x = extPosMin.x + (Mathf.Abs(extPosMax.x - extPosMin.x) * 0.5f);
             extPosMid.y = extPosMin.y + (Mathf.Abs(extPosMax.y - extPosMin.y) * 0.5f);
 
-            var posX = UDPParser.parsedData.x - extPosMid.x;
-			if( extPosXReverse )
-			{
-				posX *= -1;
-			}
 
-            var posY = UDPParser.parsedData.y - extPosMid.y;
+            float posX;
+            float posY;
+
+            if (udpDebug)
+            {
+                posX = slider.value;
+                posY = 0;
+            }
+            else
+            {
+                posX = UDPParser.parsedData.x;
+                posY = UDPParser.parsedData.y;
+             }
+
+            posX = Mathf.InverseLerp(extPosMin.x, extPosMax.x, posX);
+            if (extPosXReverse)
+            {
+                posX = 1 - posX;
+            }
+            posY = Mathf.InverseLerp(extPosMin.y, extPosMax.y, posY);
             if (extPosYReverse)
             {
-                posY *= -1;
+                posY = 1 - posY;
             }
 
             if (log)
                 Debug.Log(string.Format("fixed data = {0}, {1}", posX, posY));
 
-			x = Mathf.InverseLerp( -extDataLerpRate, extDataLerpRate, posX);
-			y = Mathf.InverseLerp( -extDataLerpRate, extDataLerpRate, posY);
+            x = posX;
+
+            y = posY;
 		}
 
 		// 入力値を使用
@@ -240,5 +255,12 @@ public class CameraController : MonoBehaviour
             //	transform.position = pos;
             transform.LookAt(target.position);
         }
+
     }
+
+    [SerializeField]
+    bool udpDebug;
+
+    [SerializeField]
+    UnityEngine.UI.Slider slider;
 }
