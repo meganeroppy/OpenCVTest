@@ -779,7 +779,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &550330020
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -947,10 +947,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 440192707}
   spinSpeed: 1
-  myMovement: 5
+  myMovement: 6
   referredObject: {fileID: 0}
   refferedObjectRate: 2000
-  moveSpeed: 0.8
+  moveSpeed: 10
   offsetLimit: {x: 0.4, y: 0.05}
   intPosMin: {x: -400, y: 150}
   intPosMax: {x: 150, y: 250}
@@ -2380,11 +2380,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAutoResetMode: 1
   isAutoResetModeToggle: {fileID: 186794852}
+  rectsList: []
   targetMeshPrefab: {fileID: 23935092070608412, guid: 4254814421c7641659e76f6159fe3590,
     type: 2}
+  targetMeshList: []
   posZ: 10
-  Width: 640
-  Height: 480
   mainCamera: {fileID: 1871338439}
   objectCamera: {fileID: 0}
 --- !u!114 &1362053829
