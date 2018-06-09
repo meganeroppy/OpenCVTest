@@ -157,7 +157,7 @@ public class CameraController : MonoBehaviour
             float posX;
             float posY;
 
-            if (udpDebug)
+            if (useDummyValue)
             {
                 posX = slider.value;
                 posY = 0;
@@ -259,7 +259,7 @@ public class CameraController : MonoBehaviour
     }
 
     [SerializeField]
-    bool udpDebug;
+    bool useDummyValue;
 
     [SerializeField]
     UnityEngine.UI.Slider slider;
