@@ -8,16 +8,14 @@ public class CameraController : MonoBehaviour
 
 	enum Movement
 	{
-        ReferInternalFaceTracking,
-        ReferInternalFaceTracking2,
-        ReferExternalFaceTracking,
+		ReferInternalFaceTracking,
+		ReferExternalFaceTracking,
 		ReferObject,
 		MousePosition,
 		Input,
-        ReferInternalFaceTrackingDlib,
-    }
+	}
 
-    [SerializeField]
+	[SerializeField]
 	Movement myMovement = Movement.MousePosition;
 
 	[SerializeField]
@@ -117,100 +115,75 @@ public class CameraController : MonoBehaviour
 
 		float x = 0, y = 0;
 
-		// OpenCVForUnityを使用したフェイストラッキング値を使用
-		if( myMovement == Movement.ReferInternalFaceTracking )
-		{
+        // OpenCVForUnityを使用したフェイストラッキング値を使用
+        if (myMovement == Movement.ReferInternalFaceTracking)
+        {
             // 中央値を計算
             intPosMid.x = intPosMin.x + (Mathf.Abs(intPosMax.x - intPosMin.x) * 0.5f);
             intPosMid.y = intPosMin.y + (Mathf.Abs(intPosMax.y - intPosMin.y) * 0.5f);
 
             // 0番目の値を使う
-            MeshRenderer source = null;
-            var detect = FaceTrackerExample.WebCamTextureFaceTrackerExample.instance;
-            if (detect == null) return;
-            var list = detect.targetMeshList;
+            CopyTransformSource source = null;
+            if (CopyTransformSource.list != null && CopyTransformSource.list.Count >= 1)
+            {
+                source = CopyTransformSource.list[0];
+            }
 
-            if ( list != null && list.Count >= 1 )
-			{
-				source = list[0];
-			}
-
-			if( source == null ) return;
+            if (source == null) return;
 
             var posX = source.transform.position.x;
             var posY = source.transform.position.y;
-
-            if( log )
-                Debug.Log(string.Format("fixed data = {0}, {1}", posX, posY));
-
-            // x,yそれぞれを-0.5~0.5の値に補間する
-            posX = Mathf.InverseLerp(intPosMin.x, intPosMax.x, posX) -.5f;
-            posY = Mathf.InverseLerp(intPosMin.y, intPosMax.y, posY) -.5f;
-
-            // 倍率適用し、0~1の範囲にする
-            x = posX * intDataRate + 0.5f;
-            y = posY * intDataRate + 0.5f;
-        }
-
-        // OpenCVForUnityを使用したフェイストラッキング値を使用 rectsの値をそのまま使うバージョン
-        else if(myMovement == Movement.ReferInternalFaceTracking2)
-        {
-            int w = 640;
-            int h = 480;
-            // 中央値を計算
-            intPosMid.x = w * 0.5f;
-            intPosMid.y = h * 0.5f;
-
-            // 0番目の値を使う
-            var detect = FaceTrackerExample.WebCamTextureFaceTrackerExample.instance;
-            if (detect == null) return;
-            var rects = detect.rectsList;
-            if (rects == null || rects.Count < 1) return;
-            var pos = rects[0];
-
-            var posX = (float)pos.x / ( pos.width / 2 );
-            var posY = (float)pos.y;
 
             if (log)
                 Debug.Log(string.Format("fixed data = {0}, {1}", posX, posY));
 
             // x,yそれぞれを-0.5~0.5の値に補間する
-            posX = Mathf.InverseLerp(0, w, posX) - .5f;
-            posY = Mathf.InverseLerp(0, h, posY) - .5f;
+            posX = Mathf.InverseLerp(intPosMin.x, intPosMax.x, posX) - .5f;
+            posY = Mathf.InverseLerp(intPosMin.y, intPosMax.y, posY) - .5f;
 
             // 倍率適用し、0~1の範囲にする
             x = posX * intDataRate + 0.5f;
             y = posY * intDataRate + 0.5f;
         }
 
-
         // UDP経由で外部アプリケーションから受け取った値フェイストラッキング値を使用
-        else if ( myMovement == Movement.ReferExternalFaceTracking )
-		{
+        else if (myMovement == Movement.ReferExternalFaceTracking)
+        {
             // 中央値を計算
             extPosMid.x = extPosMin.x + (Mathf.Abs(extPosMax.x - extPosMin.x) * 0.5f);
             extPosMid.y = extPosMin.y + (Mathf.Abs(extPosMax.y - extPosMin.y) * 0.5f);
 
-            //  var posX = UDPParser.parsedData.x - extPosMid.x;
-            var posX = UDPParser.parsedData.x;
-            //  var posY = UDPParser.parsedData.y - extPosMid.y;
-            var posY = UDPParser.parsedData.y;
+
+            float posX;
+            float posY;
+
+            if (useDummyValue)
+            {
+                posX = slider.value;
+                posY = 0;
+            }
+            else
+            {
+                posX = UDPParser.parsedData.x;
+                posY = UDPParser.parsedData.y;
+             }
 
             posX = Mathf.InverseLerp(extPosMin.x, extPosMax.x, posX);
             if (extPosXReverse)
             {
-                posX *= -1;
+                posX = 1 - posX;
             }
             posY = Mathf.InverseLerp(extPosMin.y, extPosMax.y, posY);
             if (extPosYReverse)
             {
-                posY *= -1;
+                posY = 1 - posY;
             }
 
             if (log)
                 Debug.Log(string.Format("fixed data = {0}, {1}", posX, posY));
 
             x = posX;
+
             y = posY;
 		}
 
@@ -231,40 +204,9 @@ public class CameraController : MonoBehaviour
 			y = mouse.y;
 		}
 
-        // OpenCVForUnityを使用したフェイストラッキング値を使用 dlib使用版
-        if (myMovement == Movement.ReferInternalFaceTrackingDlib)
-        {
-            int w = 640;
-            int h = 480;
-            // 中央値を計算
-            intPosMid.x = w * 0.5f;
-            intPosMid.y = h * 0.5f;
-
-            // 0番目の値を使う
-            var detect =DlibFaceLandmarkDetectorExample.WebCamTextureToMatHelperExample.instance;
-            if (detect == null) return;
-            var rects = detect.detectResult;
-            if (rects == null || rects.Count < 1) return;
-            var pos = rects[0];
-
-            var posX = pos.center.x;
-            var posY = pos.center.y;
-
-            if (log)
-                Debug.Log(string.Format("fixed data = {0}, {1}", posX, posY));
-
-            // x,yそれぞれを-0.5~0.5の値に補間する
-            posX = Mathf.InverseLerp(0, w, posX) - .5f;
-            posY = Mathf.InverseLerp(0, h, posY) - .5f;
-
-            // 倍率適用し、0~1の範囲にする
-            x = posX * intDataRate + 0.5f;
-            y = posY * intDataRate + 0.5f;
-        }
-
-        // オブジェクトの位置を参照
-        else
-        {
+		// オブジェクトの位置を参照
+		else
+		{
 			x = referredObject.position.x;
 			y = referredObject.position.y;
 		}
@@ -313,5 +255,12 @@ public class CameraController : MonoBehaviour
             //	transform.position = pos;
             transform.LookAt(target.position);
         }
+
     }
+
+    [SerializeField]
+    bool useDummyValue;
+
+    [SerializeField]
+    UnityEngine.UI.Slider slider;
 }

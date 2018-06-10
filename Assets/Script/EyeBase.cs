@@ -14,7 +14,7 @@ public class EyeBase : MonoBehaviour {
 	Transform myCamera;
 
     [SerializeField]
-    Vector3 rotDiff = Vector3.zero;
+    Vector3 rotOffset = Vector3.zero;
 
 	Vector3 pos;
 
@@ -22,7 +22,7 @@ public class EyeBase : MonoBehaviour {
 	void Update () 
 	{
 		pos = eyeBase.position;
-		transform.rotation = eyeBase.rotation * Quaternion.Euler( rotDiff );
+		transform.rotation = eyeBase.rotation * Quaternion.Euler(rotOffset);
 
 		pos.y = myCamera.position.y; 
 		transform.position = pos;
