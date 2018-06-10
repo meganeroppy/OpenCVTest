@@ -1058,18 +1058,17 @@ MonoBehaviour:
   referredObject: {fileID: 2070281571}
   refferedObjectRate: 2000
   moveSpeed: 10
-  offsetLimit: {x: 0.3, y: 0.1}
+  offsetLimit: {x: 0.7, y: 0.1}
   intPosMin: {x: -700, y: -100}
   intPosMax: {x: 0, y: 300}
   intDataRate: 400
   extPosMin: {x: 0, y: 0}
-  extPosMax: {x: 650, y: 400}
-  extDataLerpRate: 400
-  extPosXReverse: 0
+  extPosMax: {x: 640, y: 480}
+  extPosXReverse: 1
   extPosYReverse: 1
-  log: 0
-  useDummyValue: 1
+  useDummyValue: 0
   slider: {fileID: 37034076}
+  log: 0
 --- !u!1 &751411269
 GameObject:
   m_ObjectHideFlags: 0
@@ -1305,7 +1304,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &910216307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2043,6 +2042,11 @@ Prefab:
         type: 2}
       propertyPath: m_ApplyRootMotion
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 95918374560416568, guid: 40dc8a17bb5cbe14f9ed7f65da38d5fc,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114733102324784462, guid: 40dc8a17bb5cbe14f9ed7f65da38d5fc, type: 2}
