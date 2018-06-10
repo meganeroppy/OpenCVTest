@@ -62,11 +62,14 @@ using System.Collections;
 	{
 		SetEyeDir( GetCalculatedEyeDir(), 0);
 
-		if( Input.GetKeyDown(KeyCode.S) )
-		{
-			var obj = Instantiate(shot, head.position, head.rotation).AddComponent<Rigidbody>();
-			obj.AddForce( head.forward * 500f);
-		}
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            if (shot)
+            {
+                var obj = Instantiate(shot, head.position, head.rotation).AddComponent<Rigidbody>();
+                obj.AddForce(head.forward * 500f);
+            }
+        }
 	}
 
 	/// <summary>
