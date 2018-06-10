@@ -19,6 +19,7 @@ namespace FaceTrackerExample
 	[RequireComponent(typeof(WebCamTextureToMatHelper))]
 	public class WebCamTextureFaceTrackerExample : MonoBehaviour
 	{
+        public static WebCamTextureFaceTrackerExample instance;
 
 		/// <summary>
 		/// The auto reset mode. if ture, Only if face is detected in each frame, face is tracked.
@@ -70,20 +71,22 @@ namespace FaceTrackerExample
 		/// </summary>
 		private string haarcascade_frontalface_alt_xml_filepath;
 
-		[SerializeField]
-		MeshRenderer targetMeshPrefab;
+        public List<OpenCVForUnity.Rect> rectsList = new List<OpenCVForUnity.Rect>();
 
-		MeshRenderer targetMesh;
+	//	[SerializeField]
+	//	MeshRenderer targetMeshPrefab;
 
-		List<MeshRenderer> targetMeshList = new List<MeshRenderer>();
+	//	public List<MeshRenderer> targetMeshList = new List<MeshRenderer>();
 
 		[SerializeField]
 		float posZ = 10f;
 
-		public int Width = 640;
-		public int Height = 480;
+        public float Height { get { return height; } }
+        float height = 640;
+        public float Width { get { return width; } }
+        float width = 480;
 
-		[SerializeField]
+        [SerializeField]
 		Camera mainCamera;
 
 		[SerializeField]
@@ -92,6 +95,8 @@ namespace FaceTrackerExample
 		// Use this for initialization
 		void Start()
 		{
+            instance = this;
+
 			webCamTextureToMatHelper = gameObject.GetComponent<WebCamTextureToMatHelper>();
 
 			isAutoResetModeToggle.isOn = isAutoResetMode;
@@ -147,7 +152,10 @@ namespace FaceTrackerExample
 		/// </summary>
 		public void OnWebCamTextureToMatHelperInitialized()
 		{
-			Debug.Log("OnWebCamTextureToMatHelperInitialized");
+            if (mainCamera == null)
+                mainCamera = Camera.main;
+
+            Debug.Log("OnWebCamTextureToMatHelperInitialized");
 
 			Mat webCamTextureMat = webCamTextureToMatHelper.GetMat();
 
@@ -236,7 +244,7 @@ namespace FaceTrackerExample
 						{
 							//                          Debug.Log ("faces " + faces.dump ());
 
-							List<OpenCVForUnity.Rect> rectsList = faces.toList();
+							rectsList = faces.toList();
 							List<Point[]> pointsList = faceTracker.getPoints();
 
 							if (isAutoResetMode)
@@ -267,10 +275,11 @@ namespace FaceTrackerExample
 							{
 								faceTracker.addPoints(faces);
 							}
-
-							// ターゲットメッシュのリストを更新
-							{
-								while( targetMeshList.Count < rectsList.Count )
+                            /*
+                            // ターゲットメッシュのリストを更新
+                            if (targetMeshPrefab != null)
+                            {
+                                while ( targetMeshList.Count < rectsList.Count )
 								{
 									var obj = Instantiate( targetMeshPrefab ).GetComponent<MeshRenderer>();
 									obj.transform.rotation = Quaternion.Euler( -90, 0, 0);
@@ -289,7 +298,7 @@ namespace FaceTrackerExample
 									}
 								}
 							}
-
+                            */
 							//draw face rect
 							for (int i = 0; i < rectsList.Count; i++)
 							{
@@ -297,11 +306,12 @@ namespace FaceTrackerExample
 								Core.rectangle (rgbaMat, new Point (rectsList [i].x, rectsList [i].y), new Point (rectsList [i].x + rectsLIst [i].width, rectsList [i].y + rectsList [i].height), new Scalar (255, 0, 0, 255), 2);
 								#else
 								Imgproc.rectangle(rgbaMat, new Point(rectsList [i].x, rectsList [i].y), new Point(rectsList [i].x + rectsList [i].width, rectsList [i].y + rectsList [i].height), new Scalar(255, 0, 0, 255), 2);
-								#endif
-
-								// 顔の中心にオブジェクトを移動
-								{
-									var rect = rectsList[i];
+#endif
+                                /*
+                                // 顔の中心にオブジェクトを移動
+                                if (targetMeshList != null && targetMeshList.Count > 0)
+                                {
+                                    var rect = rectsList[i];
 
 //									Debug.Log( string.Format("Rect位置( {0}, {1})  Rectサイズ( {2}, {3})", rect.x, rect.y, rect.width, rect.height) );
 									var pos = new Vector2( 
@@ -313,8 +323,9 @@ namespace FaceTrackerExample
 									// オブジェクトを移動する
 									targetMeshList[i].transform.localPosition = Vector2ToVector3( pos );
 								}
+                                */
 							}
-
+                            /*
 							// 顔の中心位置にオブジェクトを移動
 							if( false )
 							{
@@ -347,7 +358,8 @@ namespace FaceTrackerExample
 									// オブジェクトを移動する
 									targetMeshList[i].transform.localPosition = Vector2ToVector3( pos );
 								}
-							}
+							}*/
+
 						} 
 						else
 						{

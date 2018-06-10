@@ -54,14 +54,15 @@ namespace DlibFaceLandmarkDetectorExample
         public float Width { get { return width; } }
         float width;
 
-        [SerializeField]
-        MeshRenderer targetMeshPrefab;
+//        [SerializeField]
+//        MeshRenderer targetMeshPrefab;
 
-        List<MeshRenderer> targetMeshList = new List<MeshRenderer>();
+//        List<MeshRenderer> targetMeshList = new List<MeshRenderer>();
 
         [SerializeField]
         float posZ = 10f;
 
+        [HideInInspector]
         public List<UnityEngine.Rect> detectResult = new List<UnityEngine.Rect>();
 
 #if UNITY_WEBGL && !UNITY_EDITOR
@@ -193,7 +194,7 @@ namespace DlibFaceLandmarkDetectorExample
                 //detect face rects
 //                List<UnityEngine.Rect> detectResult = faceLandmarkDetector.Detect();
                 detectResult = faceLandmarkDetector.Detect();
-
+                /*
                 // ターゲットメッシュのリストを更新
                 if ( targetMeshPrefab != null )
                 {
@@ -216,6 +217,7 @@ namespace DlibFaceLandmarkDetectorExample
                         }
                     }
                 }
+                */
 
                 foreach (var rect in detectResult) {
 
@@ -227,7 +229,7 @@ namespace DlibFaceLandmarkDetectorExample
 
                     //draw face rect
                     OpenCVForUnityUtils.DrawFaceRect (rgbaMat, rect, new Scalar (255, 0, 0, 255), 2);
-
+                    /*
                     // 顔の中心にオブジェクトを移動
                     if( targetMeshList != null && targetMeshList.Count> 0 )
                     {
@@ -243,7 +245,7 @@ namespace DlibFaceLandmarkDetectorExample
                         int i = detectResult.IndexOf(rect);
                         targetMeshList[i].transform.localPosition = Vector2ToVector3(pos);
                     }
-
+                    */
                 }
 
                 //Imgproc.putText (rgbaMat, "W:" + rgbaMat.width () + " H:" + rgbaMat.height () + " SO:" + Screen.orientation, new Point (5, rgbaMat.rows () - 10), Core.FONT_HERSHEY_SIMPLEX, 0.5, new Scalar (255, 255, 255, 255), 1, Imgproc.LINE_AA, false);
