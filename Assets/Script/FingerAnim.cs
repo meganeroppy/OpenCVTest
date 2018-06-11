@@ -9,6 +9,9 @@ public class FingerAnim : MonoBehaviour {
     [SerializeField]
     float animSpeed = 1f;
 
+    [SerializeField]
+    SteamVR_TrackedObject controller;
+
     bool current = false;
 
     private void Start()
@@ -23,7 +26,15 @@ public class FingerAnim : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-	if( Input.GetKeyDown( KeyCode.H ))
+        var device = SteamVR_Controller.Input((int)controller.index);
+        if (device == null) return;
+
+        if( device.GetPressDown( SteamVR_Controller.ButtonMask.Trigger ) )
+        {
+            Hold();
+        }
+
+        if ( Input.GetKeyDown( KeyCode.H ))
         {
             Hold();
         }
@@ -34,6 +45,8 @@ public class FingerAnim : MonoBehaviour {
         current = !current;
         StartCoroutine(ExecHold( current ));
     }
+
+
 
     IEnumerator ExecHold( bool key )
     {

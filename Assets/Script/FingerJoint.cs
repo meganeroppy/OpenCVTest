@@ -6,5 +6,6 @@ public class FingerJoint : MonoBehaviour {
 
     public Vector3 axis;
     public float angle;
+    [HideInInspector]
     public Quaternion defaultRot;
 }

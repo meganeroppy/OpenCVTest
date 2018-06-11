@@ -148,7 +148,15 @@ public class SteamVR_Controller
 				devices[i] = new Device(i);
 		}
 
-		return devices[deviceIndex];
+        try
+        {
+            return devices[deviceIndex % devices.Length];
+        }
+        catch( System.IndexOutOfRangeException e)
+        {
+            Debug.LogWarning(e);
+            return null;
+        }
 	}
 
 	public static void Update()
