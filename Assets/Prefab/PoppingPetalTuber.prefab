@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4522617060816536}
   - component: {fileID: 198097267738599790}
   - component: {fileID: 199275701247825462}
-  m_Layer: 12
+  m_Layer: 9
   m_Name: Heart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4735131108150330}
   - component: {fileID: 82558269563884404}
-  m_Layer: 12
+  m_Layer: 9
   m_Name: Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 199284451908391344}
   - component: {fileID: 114339826655095322}
   - component: {fileID: 82484340677308432}
-  m_Layer: 12
+  m_Layer: 9
   m_Name: PoppingPetalTuber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
