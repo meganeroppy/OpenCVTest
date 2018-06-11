@@ -26,6 +26,8 @@ public class FingerAnim : MonoBehaviour {
 
     bool holding = false;
 
+    float currentHoldPercent = 0;
+
     // Update is called once per frame
     void Update () {
         var device = SteamVR_Controller.Input((int)controller.index);
@@ -33,6 +35,9 @@ public class FingerAnim : MonoBehaviour {
 
         var triggered = device.GetPress(SteamVR_Controller.ButtonMask.Trigger);
 
+        var holdParcentPrev = currentHoldPercent;
+
+        /*
         if ( triggered && !holding )
         {
             Hold(holding = true);
@@ -40,6 +45,21 @@ public class FingerAnim : MonoBehaviour {
         else if( !triggered && holding  )
         {
             Hold(holding = false);
+        }
+        */
+
+        if (triggered && currentHoldPercent < 1f)
+        {
+            currentHoldPercent += animSpeed * Time.deltaTime;
+        }
+        else if( !triggered && currentHoldPercent > 0 )
+        {
+            currentHoldPercent -= animSpeed * Time.deltaTime;
+        }
+
+        if ( Mathf.Abs( currentHoldPercent - holdParcentPrev) > 0.001f  )
+        {
+            UpdateHold();
         }
 
         if ( Input.GetKeyDown( KeyCode.H ))
@@ -49,16 +69,22 @@ public class FingerAnim : MonoBehaviour {
         }
 	}
 
+    Coroutine holdCo = null;
+
     void Hold(bool key)
     {
-        StartCoroutine(ExecHold( key ));
+        if( holdCo != null )
+        {
+            StopCoroutine(holdCo);
+        }
+        holdCo = StartCoroutine(ExecHold( key ));
     }
 
     bool inAnim = false;
 
     IEnumerator ExecHold( bool key )
     {
-        if (inAnim) yield break;
+     //   if (inAnim) yield break;
 
         inAnim = true;
 
@@ -105,5 +131,16 @@ public class FingerAnim : MonoBehaviour {
         //    yield break;
 
         inAnim = false;
+    }
+
+    void UpdateHold()
+    {
+        foreach (FingerJoint f in fingers)
+        {
+            float angleTo = f.angle * currentHoldPercent;
+
+            f.transform.localRotation = f.defaultRot * Quaternion.Euler(f.axis * angleTo);
+        }
+
     }
 }
