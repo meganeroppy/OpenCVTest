@@ -39,7 +39,7 @@ public class UDPReceive : MonoBehaviour
 			IPEndPoint remoteEP = null;
 			byte[] data = udp.Receive(ref remoteEP);
 			text = Encoding.ASCII.GetString(data);
-			Debug.Log(text);
+    	//    Debug.Log(text);
 		}
 	}
 }

@@ -12,6 +12,9 @@ public class UDPParser : MonoBehaviour
 	[HideInInspector]
 	public static Vector2 parsedData = Vector2.zero;
 
+    [HideInInspector]
+    public static bool smile = false;
+
     [SerializeField]
     bool showLog = false;
 
@@ -24,7 +27,7 @@ public class UDPParser : MonoBehaviour
 
 		if( string.IsNullOrEmpty( data ) ) return;
 
-		// sample = x:669,y:499
+		// sample = x:669,y:499,smile:false
 
 		var split1 = data.Split(',');
 
@@ -37,18 +40,27 @@ public class UDPParser : MonoBehaviour
 			if( split2.Length < 2 ) continue;
 
 			float result = 0;
-
+            bool bResult = false;
+            // x
 			if( i == 0 )
 			{
 				if( float.TryParse(split2[1], out result) ) parsedData.x = result;
 			}
+
+            // y
 			else if( i == 1 )
 			{
 				if( float.TryParse(split2[1], out result) ) parsedData.y = result;
 			}
-		}
 
-        if( showLog )
-    		Debug.Log( parsedData );
+            // smile
+            else if (i == 2)
+            {
+                if (bool.TryParse(split2[1], out bResult)) smile = bResult;
+            }
+        }
+
+        if ( showLog )
+    		Debug.Log( string.Format("pos={0} smile={1}", parsedData, smile) );
 	}
 }

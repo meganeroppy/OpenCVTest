@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 4a0d9795fcc2749d99a9a12b5d5fcfc2, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -280,7 +280,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &39913506
 Transform:
   m_ObjectHideFlags: 0
@@ -899,7 +899,7 @@ Transform:
   m_GameObject: {fileID: 550330019}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 20}
-  m_LocalScale: {x: 1000, y: 1000.0005, z: 1000.0005}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 39913506}
   m_RootOrder: 0
@@ -1007,8 +1007,8 @@ MonoBehaviour:
   sayMediumIndex: 0
   sayLargeIndex: 0
   saySmallTrigger: 0.0001
-  sayMediumTrigger: 0.0007
-  sayLargeTrigger: 0.0014
+  sayMediumTrigger: 0.0002
+  sayLargeTrigger: 0.0003
   audioUpdateDelay: 0.08
   blendSpeed: 10
   rangeOfMotion: 100
@@ -1043,7 +1043,7 @@ MonoBehaviour:
   isAutoStart: 1
   isDebug: 0
   isMuted: 0
-  selectedMic: "\u30DE\u30A4\u30AF (3- USB Audio Device)"
+  selectedMic: HTC VIVE mic (3- USB Audio Device)
   audioSrc: {fileID: 0}
 --- !u!82 &644602811
 AudioSource:
@@ -1261,7 +1261,7 @@ MonoBehaviour:
   extPosMax: {x: 640, y: 480}
   extPosXReverse: 1
   extPosYReverse: 1
-  useDummyValue: 0
+  useDummyValue: 1
   slider: {fileID: 37034076}
   log: 0
 --- !u!1 &751411269
@@ -1598,7 +1598,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1867,8 +1867,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1183744680}
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 5000, y: 0, z: -3491}
-  m_LocalScale: {x: 1000, y: 1000, z: 1000}
+  m_LocalPosition: {x: 50, y: 0, z: -30}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 39913506}
   m_RootOrder: 1
@@ -2632,6 +2632,7 @@ MonoBehaviour:
   maxAudience: {x: 0.5, y: 1.5, z: 0.5}
   minTuber: {x: -3, y: 1, z: -15}
   maxTuber: {x: 3, y: 2, z: -6}
+  minInterval: 1
 --- !u!4 &1979396548
 Transform:
   m_ObjectHideFlags: 0
@@ -2725,8 +2726,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1984530241}
   m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: -5000, y: 0, z: -3491}
-  m_LocalScale: {x: 1000, y: 1000, z: 1000}
+  m_LocalPosition: {x: -50, y: 0, z: -30}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 39913506}
   m_RootOrder: 2
