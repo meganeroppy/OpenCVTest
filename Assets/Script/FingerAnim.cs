@@ -24,32 +24,44 @@ public class FingerAnim : MonoBehaviour {
         }
     }
 
+    bool holding = false;
+
     // Update is called once per frame
     void Update () {
         var device = SteamVR_Controller.Input((int)controller.index);
         if (device == null) return;
 
-        if( device.GetPressDown( SteamVR_Controller.ButtonMask.Trigger ) )
+        var triggered = device.GetPress(SteamVR_Controller.ButtonMask.Trigger);
+
+        if ( triggered && !holding )
         {
-            Hold();
+            Hold(holding = true);
+        }
+        else if( !triggered && holding  )
+        {
+            Hold(holding = false);
         }
 
         if ( Input.GetKeyDown( KeyCode.H ))
         {
-            Hold();
+            current = !current;
+            Hold(current );
         }
 	}
 
-    void Hold()
+    void Hold(bool key)
     {
-        current = !current;
-        StartCoroutine(ExecHold( current ));
+        StartCoroutine(ExecHold( key ));
     }
 
-
+    bool inAnim = false;
 
     IEnumerator ExecHold( bool key )
     {
+        if (inAnim) yield break;
+
+        inAnim = true;
+
         float progress = 0;
         Quaternion rot;
         if( key )
@@ -90,6 +102,8 @@ public class FingerAnim : MonoBehaviour {
         //    }
         }
 
-    //    yield break;
+        //    yield break;
+
+        inAnim = false;
     }
 }
