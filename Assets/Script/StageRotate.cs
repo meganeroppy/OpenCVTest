@@ -7,11 +7,22 @@ public class StageRotate : MonoBehaviour {
     [SerializeField]
     float rotSpeed;
 
+    [SerializeField]
+    Transform source;
+
+    Vector3 rot;
 
     // Update is called once per frame
     void Update() {
-        var h = Input.GetAxis("Horizontal");
+        if( Input.GetKeyDown(KeyCode.R) )
+        {
+            rot = transform.rotation.eulerAngles;
+            rot.y = 180f - source.transform.localRotation.eulerAngles.y;
+            transform.rotation = Quaternion.Euler(rot);
+        }
 
-        transform.Rotate(Vector3.up * -h * rotSpeed * Time.deltaTime);
+    //    var h = Input.GetAxis("Horizontal");
+
+    //    transform.Rotate(Vector3.up * -h * rotSpeed * Time.deltaTime);
 	}
 }
