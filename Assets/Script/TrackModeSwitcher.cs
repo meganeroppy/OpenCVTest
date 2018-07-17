@@ -43,7 +43,8 @@ public class TrackModeSwitcher : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 		if( Input.GetKeyDown(KeyCode.S) )
         {
             StartCoroutine(ExecSwtich());
@@ -64,6 +65,11 @@ public class TrackModeSwitcher : MonoBehaviour {
 
         vrik.enabled = motionType == MotionType.FinalIK;
         animator.enabled = motionType == MotionType.MMMD;
+        if( animator.enabled )
+        {
+            animator.transform.localPosition = Vector3.zero;
+            animator.transform.localRotation = Quaternion.identity;
+        }
 
         yield return new WaitForSeconds(1f);
 
