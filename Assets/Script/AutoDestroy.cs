@@ -9,12 +9,14 @@ public class AutoDestroy : MonoBehaviour {
     float lifeTime;
     float timer = 0;
 
+    [SerializeField]
+    float delay = 0;
 	// Use this for initialization
 	void Start ()
     {
         ps = GetComponent<ParticleSystem>();
 
-        lifeTime = ps.main.duration;
+        lifeTime = ps.main.duration + delay;
     }
 
     private void Update()

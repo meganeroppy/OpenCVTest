@@ -2,21 +2,23 @@
 using System.Collections;
 
 
-	public class ViewingDirection : MonoBehaviour
+public class ViewingDirection : MonoBehaviour
 {
 	public static ViewingDirection instance;
 
-		//目のメッシュ設定
-		public MeshRenderer eyeObjL;
-		public MeshRenderer eyeObjR;
+	//目のメッシュ設定
+	public Material eyeMatMain;
+
+    [Tooltip("目のメッシュが左右で分かれているときに使用")]
+	public Material eyeMatSub;
 
 	private float dirValX = 0;
 	private float dirValY = 0;
-		private Vector2 eyeOffset;
+	private Vector2 eyeOffset;
 
 	[SerializeField]
 	Transform head;
-
+    
 	[SerializeField]
 	Transform lookTarget;
 
@@ -26,7 +28,7 @@ using System.Collections;
 	const float EYE_X_MAX = 0.2f;
 	const float EYE_Y_MAX = 0.1f;
 
-		// Use this for initialization
+	// Use this for initialization
 	void Start () 
 	{
 		instance = this;
@@ -54,8 +56,9 @@ using System.Collections;
 	void SetEyeDir( float dirX, float dirY )
 	{
 		eyeOffset = new Vector2(dirX * EYE_X_MAX , dirY * EYE_Y_MAX);
-		eyeObjL.material.SetTextureOffset("_MainTex", eyeOffset);
-		eyeObjR.material.SetTextureOffset("_MainTex", eyeOffset);
+		eyeMatMain.SetTextureOffset("_MainTex", eyeOffset);
+        if(eyeMatSub != null)
+		eyeMatSub.SetTextureOffset("_MainTex", eyeOffset);
 	}
 
 	void Update()

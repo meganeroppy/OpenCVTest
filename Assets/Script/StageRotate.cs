@@ -13,16 +13,32 @@ public class StageRotate : MonoBehaviour {
     Vector3 rot;
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         if( Input.GetKeyDown(KeyCode.R) )
         {
-            rot = transform.rotation.eulerAngles;
-            rot.y = 180f - source.transform.localRotation.eulerAngles.y;
-            transform.rotation = Quaternion.Euler(rot);
+            Recenter();
         }
 
-    //    var h = Input.GetAxis("Horizontal");
+        var trackedObject = GetComponent<SteamVR_TrackedObject>();
+        if (trackedObject == null) return;
+        var device = SteamVR_Controller.Input((int)trackedObject.index);
+        if (device == null) return;
 
-    //    transform.Rotate(Vector3.up * -h * rotSpeed * Time.deltaTime);
-	}
+        if (device.GetPressDown(SteamVR_Controller.ButtonMask.Touchpad))
+        {
+            Recenter();
+        }
+
+        //    var h = Input.GetAxis("Horizontal");
+
+        //    transform.Rotate(Vector3.up * -h * rotSpeed * Time.deltaTime);
+    }
+
+    void Recenter()
+    {
+        rot = transform.rotation.eulerAngles;
+        rot.y = 180f - source.transform.localRotation.eulerAngles.y;
+        transform.rotation = Quaternion.Euler(rot);
+    }
 }

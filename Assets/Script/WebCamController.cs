@@ -17,6 +17,7 @@ public class WebCamController : MonoBehaviour
     int cameraIndex = 0;
 	void Start () {
 		WebCamDevice[] devices = WebCamTexture.devices;
+        if (devices.Length < 1) return;
         cameraIndex = cameraIndex % devices.Length;
 
 		webcamTexture = new WebCamTexture(devices[cameraIndex].name, this.width, this.height, this.fps);
