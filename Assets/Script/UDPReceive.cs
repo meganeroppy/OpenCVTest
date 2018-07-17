@@ -27,12 +27,38 @@ public class UDPReceive : MonoBehaviour
 	{
 	}
 
-	void OnApplicationQuit()
-	{
-		thread.Abort();
-	}
+    void OnApplicationQuit()
+    {
+        if (thread != null)
+        {
+            thread.Abort();
+            thread = null;
+        }
 
-	private static void ThreadMethod()
+        if (udp != null)
+        {
+            udp.Close();
+            udp = null;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (thread != null)
+        {
+            thread.Abort();
+            thread = null;
+        }
+
+        if (udp != null)
+        {
+            udp.Close();
+            udp = null;
+        }
+
+    }
+
+    private static void ThreadMethod()
 	{
 		while(true)
 		{
