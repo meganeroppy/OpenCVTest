@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using RootMotion.FinalIK;
 
 /// <summary>
 /// iKinemaトラッキングとMMDモーションを切り替える
@@ -10,11 +11,10 @@ public class TrackModeSwitcher : MonoBehaviour {
 
     public enum MotionType
     {
-        iKinema,
+        FinalIK,
         MMMD,
         Count
     }
-
 
     [SerializeField]
     Image dark;
@@ -26,7 +26,7 @@ public class TrackModeSwitcher : MonoBehaviour {
     MotionType motionType;
 
     [SerializeField]
-    IKinemaClient.IKinemaVRPN iKinemaController;
+    VRIK vrik;
 
     [SerializeField]
     Animator animator;
@@ -62,7 +62,7 @@ public class TrackModeSwitcher : MonoBehaviour {
         if( !notChange )
             motionType = (MotionType)(((int)motionType + 1) % (int)MotionType.Count);
 
-        iKinemaController.enabled = motionType == MotionType.iKinema;
+        vrik.enabled = motionType == MotionType.FinalIK;
         animator.enabled = motionType == MotionType.MMMD;
 
         yield return new WaitForSeconds(1f);
