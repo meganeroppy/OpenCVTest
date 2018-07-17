@@ -6,5 +6,5 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainExternal.unity
-    guid: edc1ec4278df4c74187ffd29b900701e
+    path: Assets/Scenes/MainSakura.unity
+    guid: df6edc5127f0e8b45bb27772b17869eb
