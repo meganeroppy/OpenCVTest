@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 212749777329207328}
-  lifeTime: 1
+  lifeTime: 3
 --- !u!212 &212749777329207328
 SpriteRenderer:
   m_ObjectHideFlags: 1
