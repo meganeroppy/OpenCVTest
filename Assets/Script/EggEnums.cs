@@ -42,4 +42,14 @@ namespace EggSystem
         Kyaramel,
         Count
     }
+
+	/// <summary>
+	/// ライブ配信中の視聴者コメント情報
+	/// </summary>
+	public struct UserInfo
+	{
+		public string name;
+		public string comment;
+	}
 }
+
