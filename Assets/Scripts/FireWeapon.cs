@@ -15,9 +15,6 @@ public class FireWeapon : MonoBehaviour {
 	[SerializeField]
 	AudioSource se;
 
-    [SerializeField]
-    GameObject gunVisual;
-
 	/// <summary>
 	/// 銃撃ビジュアルのマテリアル
 	/// </summary>
@@ -40,18 +37,11 @@ public class FireWeapon : MonoBehaviour {
 
     public bool Firing {get;set;}
 
-    /// <summary>
-    /// 対応する手のアニメ制御
-    /// </summary>
-    [SerializeField]
-    FingerAnim handAnim;
-
 	// Use this for initialization
 	void Start () 
 	{
 		PresetHoles();
-		laserVisual.SetActive(false);
-        muzzleFlash.color = Color.clear;
+		laserVisual.SetActive(false);		muzzleFlash.color = Color.clear;
 	}
 	
 	// Update is called once per frame
@@ -60,30 +50,14 @@ public class FireWeapon : MonoBehaviour {
         var device = SteamVR_Controller.Input((int)controller.index);
         if (device == null) return;
 
-        var gripped = device.GetPressDown(SteamVR_Controller.ButtonMask.Grip);
-        if (gripped)
-        {
-            gunVisual.SetActive(!gunVisual.activeInHierarchy);
-
-            // 手の形をデフォルトに
-            handAnim.SetHandDefault();
-            // 銃を持っているときは手のアニメなし
-            handAnim.enabled = !gunVisual.activeInHierarchy;
-
-            var efs = gunVisual.activeInHierarchy ? weaponAppearEffect : weaponDisappearEffect;
-            Instantiate(efs, transform.position, Quaternion.identity);
-        }
-
-        if (!gunVisual.activeInHierarchy) return;
-
         var triggered = device.GetPress(SteamVR_Controller.ButtonMask.Trigger);
 
         Firing = Input.GetKey( KeyCode.Space ) || triggered;
 
 		UpdateFire();
-    }
+	}
 
-    void UpdateFire()
+	void UpdateFire()
 	{
 		if( Firing )
 		{
@@ -134,15 +108,9 @@ public class FireWeapon : MonoBehaviour {
 
 	int presetHolesCount = 8;
 
-	static List<GameObject> holePool;
+	List<GameObject> holePool = new List<GameObject>();
 
-    [SerializeField]
-    GameObject weaponAppearEffect;
-
-    [SerializeField]
-    GameObject weaponDisappearEffect;
-
-    void UpdateHoles()
+	void UpdateHoles()
 	{
 		RaycastHit hit;
 		if( !Physics.Raycast( muzzle.position, muzzle.transform.forward, out hit, 30f) )
@@ -151,11 +119,6 @@ public class FireWeapon : MonoBehaviour {
 		}
 
 		GameObject obj = null;
-
-        if( holePool == null )
-        {
-            holePool = new List<GameObject>();
-        }
 
 		for( int i=0 ; i<holePool.Count ; ++i )
 		{
@@ -184,12 +147,7 @@ public class FireWeapon : MonoBehaviour {
 
 	void PresetHoles()
 	{
-        if (holePool == null)
-        {
-            holePool = new List<GameObject>();
-        }
-
-        for ( int i=0 ; i<presetHolesCount ; ++i )
+		for( int i=0 ; i<presetHolesCount ; ++i )
 		{
 			var obj = Instantiate( prefab );
 			obj.SetActive(false);
