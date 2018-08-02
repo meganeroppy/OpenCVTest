@@ -28,6 +28,8 @@ public class CommentManager : MonoBehaviour {
     float minRange = 3f;
     [SerializeField]
     float maxRange = 10f;
+    [SerializeField]
+    float maxHightDif = 0.2f;
 
     void Start ()
     {
@@ -61,7 +63,7 @@ public class CommentManager : MonoBehaviour {
             pos = center.position + ( Random.insideUnitSphere * maxRange);
             distance = (center.position - pos).magnitude;
 
-        } while (pos.y < 0.2f || distance < minRange);
+        } while ( Mathf.Abs( pos.y - center.position.y) > maxHightDif || distance < minRange);
 
         obj.transform.position = pos;
 

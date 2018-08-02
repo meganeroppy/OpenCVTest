@@ -26,6 +26,9 @@ public class CommentBoard : MonoBehaviour
     [SerializeField]
     GameObject delEffect;
 
+    [SerializeField]
+    float effectScale = 0.5f;
+
     bool setOnce = false;
 
     void Awake()
@@ -50,7 +53,7 @@ public class CommentBoard : MonoBehaviour
         timer = 0;
 
         var efs = Instantiate(popEffect);
-        efs.transform.localScale = Vector3.one * 4;
+        efs.transform.localScale = Vector3.one * effectScale;
         efs.transform.position = transform.position;
 
         setOnce = true;
@@ -88,7 +91,7 @@ public class CommentBoard : MonoBehaviour
         if (setOnce && !quited)
         {
             var efs = Instantiate(delEffect);
-            efs.transform.localScale = Vector3.one * 4;
+            efs.transform.localScale = Vector3.one * effectScale;
             efs.transform.position = transform.position;
         }
 
