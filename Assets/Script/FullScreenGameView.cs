@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
-using UnityEditor;
+#if UNITY_EDITOR_WIN || UNITY_EDITOR_OSX
+using UnityEditor; 
+#endif
+
 
 // GameViewをフルスクリーンで表示するスクリプト(WindowsはF11、macOSはCommand+Shift+Fでトグル動作)
 public class FullScreenGameView
@@ -11,6 +14,9 @@ public class FullScreenGameView
 #elif UNITY_EDITOR_OSX
     [MenuItem(menuPath + " %#f", false, 2001)]
 #endif
+
+#if UNITY_EDITOR_WIN || UNITY_EDITOR_OSX
+
     public static void Execute()
     {
         EditorWindow gameView = GetGameView();
@@ -45,6 +51,7 @@ public class FullScreenGameView
         // ウィンドウが存在しない場合は生成される
         return EditorWindow.GetWindow(System.Type.GetType("UnityEditor.GameView,UnityEditor"));
     }
+#endif
 
     // デフォルト位置パラメータ(元の位置には戻せないので、扱いやすい位置＆サイズにしておく)
     private static Vector2 minSize = new Vector2(100.0f, 100.0f);
