@@ -32,7 +32,7 @@ public class CameraManager : MonoBehaviour {
         for( int i=0; i < cameraList.Length; ++i)
         {
             bool flag = i == currentCameraIndex;
-            cameraList[i].enabled = flag;
+            cameraList[i].gameObject.SetActive( flag );
             if( flag )
             {
                 lookAtHead.Target = cameraList[i].transform;
