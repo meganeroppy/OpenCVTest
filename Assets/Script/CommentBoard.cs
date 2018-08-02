@@ -31,6 +31,8 @@ public class CommentBoard : MonoBehaviour
 
     bool setOnce = false;
 
+    public bool grabbed = false;
+
     void Awake()
     {
         if( rb == null)
@@ -79,6 +81,9 @@ public class CommentBoard : MonoBehaviour
 
     private void Update()
     {
+        // 掴まれている間はタイマーの更新を停止
+        if (grabbed) return;
+
         timer += Time.deltaTime;
         if( timer >= lifeTime )
         {

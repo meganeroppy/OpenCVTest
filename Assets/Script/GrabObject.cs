@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof( SteamVR_TrackedObject))]
 public class GrabObject : MonoBehaviour {
 
-    GameObject current = null;
+    CommentBoard current = null;
 
     SteamVR_TrackedObject controller;
 
@@ -53,7 +53,7 @@ public class GrabObject : MonoBehaviour {
         var pool = CommentBoard.pool;
         float nearest = float.MaxValue;
 
-        GameObject target = null;
+        CommentBoard target = null;
         for( int i=0; i<pool.Count; ++i )
         {
             var obj = pool[i];
@@ -64,7 +64,7 @@ public class GrabObject : MonoBehaviour {
             {
                 if( distance < nearest )
                 {
-                    target = obj.gameObject;
+                    target = obj;
                     nearest = distance;
                 }
             }
@@ -74,6 +74,8 @@ public class GrabObject : MonoBehaviour {
 
         current = target;
 
+        current.grabbed = true;
+
         current.transform.SetParent(transform);
     }
 
@@ -82,6 +84,8 @@ public class GrabObject : MonoBehaviour {
         if (current == null) return;
 
         current.transform.SetParent(originParent);
+
+        current.grabbed = false;
 
         current = null;
     }
