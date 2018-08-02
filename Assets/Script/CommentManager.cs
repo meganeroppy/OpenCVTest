@@ -92,6 +92,7 @@ public class CommentManager : MonoBehaviour {
         if( ret == null )
         {
             ret = Instantiate(commentBoardPrefab);
+            ret.transform.SetParent(transform);
             pool.Add(ret);
         }
 
@@ -110,6 +111,7 @@ public class CommentManager : MonoBehaviour {
         for (int i = 0; i < presetBoardPoolCount; ++i)
         {
             var obj = Instantiate(commentBoardPrefab);
+            obj.transform.SetParent(transform);
             obj.gameObject.SetActive(false);
             pool.Add(obj);
         }

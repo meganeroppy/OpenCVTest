@@ -21,7 +21,14 @@ public class CommentBoard : MonoBehaviour
     float lifeTime = 60f;
     float timer = 0;
 
-     void Awake()
+    [SerializeField]
+    GameObject popEffect;
+    [SerializeField]
+    GameObject delEffect;
+
+    bool setOnce = false;
+
+    void Awake()
     {
         if( rb == null)
         {
@@ -41,6 +48,12 @@ public class CommentBoard : MonoBehaviour
 
         this.lifeTime = lifeTime;
         timer = 0;
+
+        var efs = Instantiate(popEffect);
+        efs.transform.localScale = Vector3.one * 4;
+        efs.transform.position = transform.position;
+
+        setOnce = true;
 	}
 
 	Rect iconRect = new Rect(0,0,88,88);
@@ -68,5 +81,24 @@ public class CommentBoard : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+    }
+
+    private void OnDisable()
+    {
+        if (setOnce && !quited)
+        {
+            var efs = Instantiate(delEffect);
+            efs.transform.localScale = Vector3.one * 4;
+            efs.transform.position = transform.position;
+        }
+
+        setOnce = false;
+    }
+
+    bool quited = false;
+
+    private void OnApplicationQuit()
+    {
+        quited = true;
     }
 }

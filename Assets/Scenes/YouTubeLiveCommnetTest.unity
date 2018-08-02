@@ -240,6 +240,10 @@ MonoBehaviour:
   source: {fileID: 1754422127}
   commentBoardPrefab: {fileID: 114267980279115880, guid: 7784b4f43bc664e94be5159c420d2df7,
     type: 2}
+  boradLifeTime: 60
+  presetBoardPoolCount: 30
+  center: {fileID: 1754422122}
+  maxRange: 10
 --- !u!4 &293538870
 Transform:
   m_ObjectHideFlags: 0
@@ -495,13 +499,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1754422118}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 003d1f0021f6ca746a2c9002d97b4ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   access:
-    id: 8ubDnTeA9kM
+    id: u5YK2kyeoqg
     clientId: 638521787421-pn0dljha70ulqb1kg685qe2ep8bu3hel.apps.googleusercontent.com
     clientSecret: Lyt7Er2nxKUxoaaPpWU1vz56
     redirectUri: http://localhost:8080
@@ -517,7 +521,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1754422118}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92e2d14d91b8ec94cb5ff8fe636a134b, type: 3}
   m_Name: 
