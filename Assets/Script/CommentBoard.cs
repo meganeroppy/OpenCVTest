@@ -16,7 +16,20 @@ public class CommentBoard : MonoBehaviour
 	[SerializeField]
 	SpriteRenderer image;
 
-	public void Set(  Chat.Msg msg  )
+    Rigidbody rb;
+
+    float lifeTime = 60f;
+    float timer = 0;
+
+     void Awake()
+    {
+        if( rb == null)
+        {
+            rb = GetComponent<Rigidbody>();
+        }
+    }
+
+    public void Set(  Chat.Msg msg, float lifeTime=0 )
 	{
 		name.text = msg.name;
 		comment.text = msg.text;	
@@ -25,6 +38,9 @@ public class CommentBoard : MonoBehaviour
 		{
 			StartCoroutine( LoadImage( msg.img ) ); 
 		}
+
+        this.lifeTime = lifeTime;
+        timer = 0;
 	}
 
 	Rect iconRect = new Rect(0,0,88,88);
@@ -44,4 +60,13 @@ public class CommentBoard : MonoBehaviour
 //		RawImage rawImage = GetComponent<RawImage>();
 //		rawImage.texture = www.textureNonReadable;
 	}
+
+    private void Update()
+    {
+        timer += Time.deltaTime;
+        if( timer >= lifeTime )
+        {
+            gameObject.SetActive(false);
+        }
+    }
 }
