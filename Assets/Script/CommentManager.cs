@@ -63,7 +63,7 @@ public class CommentManager : MonoBehaviour {
             pos = center.position + ( Random.insideUnitSphere * maxRange);
             distance = (center.position - pos).magnitude;
 
-        } while ( Mathf.Abs( pos.y - center.position.y) > maxHightDif || distance < minRange);
+        } while ( Mathf.Abs( pos.y - center.position.y) > maxHightDif || distance < minRange || ExistInFront( pos, center.position ) );
 
         obj.transform.position = pos;
 
@@ -103,6 +103,20 @@ public class CommentManager : MonoBehaviour {
         }
 
         return ret;
+    }
+
+    [SerializeField]
+    float frontThreshold = 0.2f;
+
+    bool ExistInFront(Vector3 pos, Vector3 center)
+    {
+        // 後ろ半分はセーフ
+        if (pos.z > center.z) return false;
+
+        // 前方特定範囲か調べる
+        if (Mathf.Abs( center.x - pos.x) > frontThreshold) return false;
+
+        return true;
     }
 
     void CreatePresetBoardPool()
