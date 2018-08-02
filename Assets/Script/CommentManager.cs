@@ -25,9 +25,11 @@ public class CommentManager : MonoBehaviour {
     Transform center = null;
 
     [SerializeField]
+    float minRange = 3f;
+    [SerializeField]
     float maxRange = 10f;
 
-	void Start ()
+    void Start ()
     {
 		ctrl.OnMessage += msg => { ReceiveCommentEvent( msg); 
 		};
@@ -52,12 +54,14 @@ public class CommentManager : MonoBehaviour {
         var obj = GetBoard();
 
         Vector3 pos = Vector3.zero;
+        float distance = 0;
 
         do
         {
             pos = center.position + ( Random.insideUnitSphere * maxRange);
+            distance = (center.position - pos).magnitude;
 
-        } while (pos.y < 0.2f);
+        } while (pos.y < 0.2f || distance < minRange);
 
         obj.transform.position = pos;
 
