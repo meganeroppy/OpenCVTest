@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class BGColorChange : MonoBehaviour {
 
-    Camera myCamera;
+    [SerializeField]
+    List<Camera> cameraList;
 
     BgType current;
 
     [SerializeField]
     GameObject classroomAsset;
+
+    [SerializeField]
+    Material whiteMat;
+
+    [SerializeField]
+    Material blackMat;
 
     enum BgType
     {
@@ -21,7 +28,6 @@ public class BGColorChange : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        myCamera = GetComponent<Camera>();
         current = BgType.White;
     }
 	
@@ -40,11 +46,13 @@ public class BGColorChange : MonoBehaviour {
         switch( current )
         {
             case BgType.White:
-                myCamera.backgroundColor = Color.white;
+                cameraList.ForEach( c => c.backgroundColor = Color.white);
+                RenderSettings.skybox = whiteMat;
                 if (classroomAsset.activeInHierarchy) classroomAsset.SetActive(false);
                 break;
             case BgType.Black:
-                myCamera.backgroundColor = Color.black;
+                cameraList.ForEach(c => c.backgroundColor = Color.black);
+                RenderSettings.skybox = blackMat;
                 if (classroomAsset.activeInHierarchy) classroomAsset.SetActive(false);
                 break;
             case BgType.Classroom:
