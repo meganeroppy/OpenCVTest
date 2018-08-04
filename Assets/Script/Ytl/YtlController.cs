@@ -15,7 +15,18 @@ namespace YouTubeLive {
 
     public event Action<Chat.Msg> OnMessage;
 
+		void Awake()
+		{
+			if(  id != null )
+			{
+				id.text = access.id;
+			}
+
+		}
+
     IEnumerator Start() {
+
+
       OnMessage += _ => {};
 
       var client = GetComponent<YtlClient> ();
@@ -65,7 +76,28 @@ namespace YouTubeLive {
         yield return new WaitForSeconds (interval);
       }
     }
+		[SerializeField]
+		UnityEngine.UI.InputField id;
 
-  }
+		void Update()
+		{
+			if( Input.GetKeyDown( KeyCode.Y ) )
+			{
+				if(  id != null )
+				{
+					id.gameObject.SetActive( !id.gameObject.activeInHierarchy );
+				}
+			}
+		}
 
+		public void UpdateId( )
+		{
+			if( id != null && !string.IsNullOrEmpty(id.text) )
+			{
+				access.id = id.text;
+				id.gameObject.SetActive( false );
+				StartCoroutine( Start() );
+			}
+		}
+  }		
 }
