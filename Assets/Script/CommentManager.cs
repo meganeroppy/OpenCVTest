@@ -43,7 +43,7 @@ public class CommentManager : MonoBehaviour {
     {
         if( Input.GetKeyDown(KeyCode.Space))
         {
-            DebugCraeteMsg();
+            CraeteTutorialMsgs();
         }
     }
 
@@ -63,7 +63,7 @@ public class CommentManager : MonoBehaviour {
             pos = center.position + ( Random.insideUnitSphere * maxRange);
             distance = (center.position - pos).magnitude;
 
-        } while ( Mathf.Abs( pos.y - center.position.y) > maxHightDif || distance < minRange || ExistInFront( pos, center.position ) );
+        } while ( Mathf.Abs( pos.y - center.position.y) > maxHightDif || distance < minRange  || ExistInBadPosition( pos, center.position ) );
 
         obj.transform.position = pos;
 
@@ -108,15 +108,19 @@ public class CommentManager : MonoBehaviour {
     [SerializeField]
     float frontThreshold = 0.2f;
 
-    bool ExistInFront(Vector3 pos, Vector3 center)
+	/// <summary>
+	/// 後ろ半分と正面の真ん中はtrue
+	/// 視聴者から見てキャラとかぶるのでチェック
+	/// </summary>
+    bool ExistInBadPosition(Vector3 pos, Vector3 center)
     {
-        // 後ろ半分はセーフ
-        if (pos.z > center.z) return false;
+        // 後ろ半分
+		if (pos.z > center.z) return true;
 
-        // 前方特定範囲か調べる
-        if (Mathf.Abs( center.x - pos.x) > frontThreshold) return false;
+        // 前方正面
+		if (Mathf.Abs( center.x - pos.x) < frontThreshold) return true;
 
-        return true;
+		return false;
     }
 
     void CreatePresetBoardPool()
@@ -137,13 +141,60 @@ public class CommentManager : MonoBehaviour {
         }
     }
 
-    public void DebugCraeteMsg()
+    public void CraeteTutorialMsgs()
     {
-        var msg = new Chat.Msg();
+		// すでに表示されているメッセージを削除
+		if( CommentBoard.pool != null )
+		{
+			for( int i=0 ; i < CommentBoard.pool.Count ; ++i )
+			{
+				if( CommentBoard.pool[i].gameObject.activeInHierarchy )
+				{
+					CommentBoard.pool[i].gameObject.SetActive(false);
+				}
+			}
+		}
 
-        msg.name = "testName";
-        msg.text = "testMsg";
-
-        ReceiveCommentEvent(msg);
+		StartCoroutine( ExecCreateMsgs() );
     }
+
+	[SerializeField]
+	float tutorialMsgInterval = 5f;
+
+	[SerializeField]
+	string[] tutorialMsgs = new string[]
+	{
+		"こんにちは！バーチャルユーチューバーになった気分はどうですか？",
+		"たくさんしゃべってみるのが盛り上げるコツです。",
+		"早速大きな声で言ってみましょう。「こんにちは！」",
+		"これからチュートリアルを開始します！まず、今見えているものについて説明します。",
+		"目の前に映っているのはWebカメラの映像、その上に表示された映像が、今ライブ配信されている映像です。",
+		"配信を見ているみんなに手を振ってみましょう！やっほ〜。",
+		"コントローラの操作について説明します。使うのは、タッチパッドとトリガーです。",
+		"手元を見てください。顔アイコンが４つある部分がタッチパッド、人指し指が乗っているのがトリガーです。",
+		"タッチパッドの顔アイコン部分を押し込むと、表情を変えることができます。",
+		"笑ってみてください！タッチパッドの下を押し込むと笑顔になります。スマイル！",
+		"トリガーを引くと、手をにぎらせることができます。",
+		"このボードに触った状態で、手をにぎってみてください！つかむことができます！",
+		"もう気づいているかもしれませんが、このボードには視聴者のみんなからのコメントも表示されます！",
+		"リアクションをして、視聴者と交流してみましょう！",
+		"以上でチュートリアルを終了します。わからないことがあったら、お気軽にスタッフを呼んでください！",
+		"良いバーチャルユーチューバー体験を！",
+	};
+
+	IEnumerator ExecCreateMsgs()
+	{
+		var msg = new Chat.Msg();
+
+		msg.name = "チュートリアル";
+
+		for( int i=0 ; i< tutorialMsgs.Length ; ++i )
+		{
+			msg.text = tutorialMsgs[i];
+
+			ReceiveCommentEvent(msg);
+
+			yield return new WaitForSeconds( tutorialMsgInterval );
+		}
+	}
 }
