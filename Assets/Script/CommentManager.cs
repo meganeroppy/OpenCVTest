@@ -155,11 +155,17 @@ public class CommentManager : MonoBehaviour {
 			}
 		}
 
-		StartCoroutine( ExecCreateMsgs() );
+		if( tutorialCo != null ) 
+		{
+			StopCoroutine( tutorialCo );
+			tutorialCo = null;
+		}
+
+		tutorialCo = StartCoroutine( ExecCreateMsgs() );
     }
 
 	[SerializeField]
-	float tutorialMsgInterval = 5f;
+	float tutorialMsgInterval = 8f;
 
 	[SerializeField]
 	string[] tutorialMsgs = new string[]
@@ -182,6 +188,8 @@ public class CommentManager : MonoBehaviour {
 		"良いバーチャルユーチューバー体験を！",
 	};
 
+	Coroutine tutorialCo = null;
+
 	IEnumerator ExecCreateMsgs()
 	{
 		var msg = new Chat.Msg();
@@ -196,5 +204,7 @@ public class CommentManager : MonoBehaviour {
 
 			yield return new WaitForSeconds( tutorialMsgInterval );
 		}
+
+		tutorialCo = null;
 	}
 }

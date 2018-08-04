@@ -17,6 +17,15 @@ public class GrabObject : MonoBehaviour {
     [SerializeField]
     Transform originParent;
 
+	/// <summary>
+	/// 前フレームの位置
+	/// コメントを投げる処理に使用
+	/// </summary>
+	Vector3 prevPosition;
+
+	[SerializeField]
+	float throwForceRate = 100f;
+
 	// Use this for initialization
 	void Start () {
         controller = GetComponent<SteamVR_TrackedObject>();
@@ -44,6 +53,11 @@ public class GrabObject : MonoBehaviour {
         }
 
         grabbedPrev = grabbed;
+
+		if( grabbed )
+		{
+			prevPosition = transform.position;
+		}
     }
 
     void Grab()
@@ -86,6 +100,15 @@ public class GrabObject : MonoBehaviour {
         current.transform.SetParent(originParent);
 
         current.grabbed = false;
+
+		// 掴んで離したら物理挙動を有効にする
+
+		// 投げる力を簡易的に計算
+		var offset = transform.position - prevPosition;
+		var dir = offset.normalized;
+		var force = offset.magnitude * throwForceRate;
+
+		current.EnablePhysics( dir * force );
 
         current = null;
     }

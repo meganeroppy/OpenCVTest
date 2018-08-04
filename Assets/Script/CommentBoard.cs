@@ -17,6 +17,10 @@ public class CommentBoard : MonoBehaviour
 	SpriteRenderer image;
 
     Rigidbody rb;
+//	public Rigidbody Rb{ get{ return rb; } }
+
+	BoxCollider bc;
+//	public BoxCollider Bc{ get{ return bc; } }
 
     float lifeTime = 60f;
     float timer = 0;
@@ -39,6 +43,10 @@ public class CommentBoard : MonoBehaviour
         {
             rb = GetComponent<Rigidbody>();
         }
+		if( bc == null)
+		{
+			bc = GetComponent<BoxCollider>();
+		}
     }
 
     public void Set(  Chat.Msg msg, float lifeTime=0 )
@@ -87,9 +95,18 @@ public class CommentBoard : MonoBehaviour
         timer += Time.deltaTime;
         if( timer >= lifeTime )
         {
-            gameObject.SetActive(false);
+			if( rb.constraints == RigidbodyConstraints.FreezeAll )
+			{
+				EnablePhysics();
+			}
         }
     }
+
+	void OnEnable()
+	{
+		rb.constraints = RigidbodyConstraints.FreezeAll;
+		bc.enabled = false;
+	}
 
     private void OnDisable()
     {
@@ -109,4 +126,21 @@ public class CommentBoard : MonoBehaviour
     {
         quited = true;
     }
+
+	/// <summary>
+	/// 物理挙動を有効にする
+	/// </summary>
+	public void EnablePhysics(){ EnablePhysics(Vector3.zero); }
+
+	public void EnablePhysics( Vector3 addForce )
+	{
+		rb.constraints = RigidbodyConstraints.None;
+		rb.AddForce(addForce);
+		bc.enabled = true;
+	}
+
+	void OnCollisionEnter( Collision col )
+	{
+		gameObject.SetActive(false);
+	}
 }
